@@ -1,6 +1,6 @@
 interface SectionProps {
   children: React.ReactNode;
-  bg?: "white" | "navy" | "light-gray";
+  bg?: "white" | "navy" | "light-gray" | "ink";
   className?: string;
   id?: string;
 }
@@ -9,6 +9,7 @@ const bgStyles = {
   white: "bg-white text-navy",
   navy: "bg-navy text-white",
   "light-gray": "bg-light-gray text-navy",
+  ink: "bg-ink text-bone",
 };
 
 export default function Section({
