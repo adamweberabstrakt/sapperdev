@@ -7,7 +7,7 @@ export default function ChiliPiperLoader() {
     <Script
       id="chilipiper-concierge"
       src="https://abstraktmg.chilipiper.com/concierge-js/cjs/concierge.js"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       crossOrigin="anonymous"
     />
   );

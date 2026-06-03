@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import BookingButton from "@/components/ui/BookingButton";
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import DossierCard from "@/components/home/DossierCard";
@@ -111,7 +112,7 @@ export default function AppointmentSetting() {
             {"We build a verified, intent-scored target list around your exact ICP, then run coordinated outreach across every channel to put qualified, ready-to-talk meetings on your calendar. The list is the difference — everything else fires from it."}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "0.24s" }}>
-            <Button href="/contact" variant="acid">Book a strategy call</Button>
+            <BookingButton>Book a strategy call</BookingButton>
             <Button href="/results" variant="outline-acid">See the results</Button>
           </div>
         </div>
@@ -362,7 +363,7 @@ export default function AppointmentSetting() {
               {"Bring us your dream accounts. We will build the list, run the motion, and book the meetings — guaranteed."}
             </p>
             <div className="mt-10">
-              <Button href="/contact" variant="acid">Book a strategy call</Button>
+              <BookingButton>Book a strategy call</BookingButton>
             </div>
           </AnimateIn>
         </div>

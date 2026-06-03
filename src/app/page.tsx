@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import BookingButton from "@/components/ui/BookingButton";
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import DossierCard from "@/components/home/DossierCard";
@@ -92,7 +93,7 @@ export default function Home() {
             className="mt-10 flex flex-wrap gap-4 animate-fade-up"
             style={{ animationDelay: "0.24s" }}
           >
-            <Button href="/contact" variant="acid">Book a strategy call</Button>
+            <BookingButton>Book a strategy call</BookingButton>
             <Button href="/results" variant="outline-acid">See the results</Button>
           </div>
 
@@ -279,7 +280,7 @@ export default function Home() {
               the decision-makers you actually want.
             </p>
             <div className="mt-10">
-              <Button href="/contact" variant="acid">Book a strategy call</Button>
+              <BookingButton>Book a strategy call</BookingButton>
             </div>
           </AnimateIn>
         </div>
