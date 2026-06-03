@@ -79,3 +79,32 @@ rendered in brand v2.
   Easy to add later if you want public pricing.
 - Single-file change (page.tsx) — reused existing v2 tokens/components, no shared edits.
 - "Direct Mail" channel links to /contact (no dedicated page yet).
+
+---
+
+# Page 3 — Results (parent) + Case Study children + ChiliPiper booking
+
+## Status: SHIPPED to production
+Brief: restructure /results like leadium.com/case-studies as a PARENT for case-study
+child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to ChiliPiper.
+
+## Done
+- [x] Pull Leadium case-studies (structure) + use real Sapper results
+- [x] Results parent: hero, embedded video (click-to-load facade), proof stats, case-study grid, testimonials, CTA
+- [x] /results/[slug] child pages (6 industries) via generateStaticParams (SSG) + generateMetadata
+- [x] New caseStudies.ts data (additive; existing CASE_STUDIES untouched)
+- [x] BookingButton: ChiliPiper router + GTM "meeting_booked" event + /contact fallback
+- [x] VideoEmbed: privacy-enhanced, click-to-load (no iframe until clicked)
+- [x] Swap primary CTAs (home, appointment) to BookingButton; loader -> afterInteractive
+- [x] Clean build (22 pages); pushed to main
+
+## ChiliPiper — wired to existing config, NEEDS confirmation (see chat)
+- Uses concierge.js @ abstraktmg.chilipiper.com + router "sapper_router_1" (already in repo)
+- Open question: does the router pop & book with NO form/lead data? Needs live test.
+- Conversion: fires dataLayer "meeting_booked" — needs a GTM trigger+tag to count it.
+
+## Next phase
+- [ ] Confirm ChiliPiper router behavior; finish site-wide CTA swap (other pages/Navbar)
+- [ ] Build cold-calling / cold-email / LinkedIn service pages (reuse appointment pattern)
+- [ ] Reskin Navbar/Footer + inner pages to v2
+- [ ] (Later) form fills for soft conversions / list signups
