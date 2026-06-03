@@ -52,3 +52,30 @@ Motifs: mono kicker labels, acid dash dividers, redacted dossier card, stat row.
 - [ ] Replace logo SVG if a v2 mark exists
 - [ ] Extract theme config (colors/fonts/copy) into one place for multi-brand reuse
 - [ ] Wire CTAs to ChiliPiper booking directly (currently route to /contact)
+
+---
+
+# Page 2 — B2B Appointment Setting (/b2b-appointment-setting)
+
+## Status: SHIPPED to production
+Brief: combine current Sapper /solutions/ content + new focus on technicality &
+list quality, organized in the flow/depth of leadium.com/services/appointment-setting,
+rendered in brand v2.
+
+## Done
+- [x] Pull Leadium page (flow/structure only) + current Sapper /solutions/ content
+- [x] Hero + proof strip (2,000+ clients / 80+ industries / 50 states / 500K+ meetings)
+- [x] Differentiators (no spray, no bought lists)
+- [x] List-quality engine centerpiece: 125M+ records → ICP → enrich → verify → intent → cleanse → human QA, with reused DossierCard
+- [x] 5-step "operation" process; coordinated channels (links to service pages)
+- [x] Deliverables / what-you-get; testimonials + industry metrics
+- [x] FAQ (native details, server-rendered); final CTA
+- [x] Clean build; H1 + 8 H2s + 6 FAQs in static HTML; pushed to main
+
+## Review / decisions
+- Leadium used for STRUCTURE only — all copy original or adapted from Sapper's own content.
+- Removed legacy "Bionic" brand references; kept testimonial substance + attribution.
+- Pricing table from current /solutions/ deliberately OMITTED (gated-to-consult, Leadium-style).
+  Easy to add later if you want public pricing.
+- Single-file change (page.tsx) — reused existing v2 tokens/components, no shared edits.
+- "Direct Mail" channel links to /contact (no dedicated page yet).
