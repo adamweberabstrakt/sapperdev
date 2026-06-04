@@ -61,6 +61,9 @@ export default function Contact() {
                   LinkedIn
                 </a>
               </div>
+              <a href={siteConfig.location.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 block font-mono text-[11px] uppercase tracking-[0.18em] text-steel transition-colors hover:text-acid">
+                {siteConfig.location.full}
+              </a>
             </AnimateIn>
 
             {/* Right: inline calendar */}

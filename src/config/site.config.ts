@@ -20,10 +20,15 @@ export const siteConfig = {
 
   location: {
     basedIn: "U.S.-based",
+    street: "701 N 1st St, Suite 201",
     city: "St. Louis",
     state: "Missouri",
+    stateAbbr: "MO",
+    zip: "63102",
     region: "the Midwest",
     teamSize: "400+",
+    full: "701 N 1st St, Suite 201, St. Louis, MO 63102",
+    mapsUrl: "https://maps.app.goo.gl/hL12XaSsL3i7TJwL6",
   },
 
   social: {

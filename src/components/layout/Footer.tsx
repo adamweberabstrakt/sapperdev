@@ -52,6 +52,9 @@ export default function Footer() {
             <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
               {`${siteConfig.location.basedIn} · ${siteConfig.location.teamSize} in ${siteConfig.location.city}`}
             </p>
+            <a href={siteConfig.location.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block text-sm text-bone/55 transition-colors hover:text-acid">
+              {siteConfig.location.full}
+            </a>
             <div className="mt-4 flex gap-5 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
               <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-acid">LinkedIn ↗</a>
               <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-acid">Facebook ↗</a>
