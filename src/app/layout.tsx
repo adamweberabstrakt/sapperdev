@@ -7,10 +7,12 @@ import ChiliPiperLoader from "@/components/integrations/ChiliPiper";
 import BookingModal from "@/components/booking/BookingModal";
 import Chatbot from "@/components/integrations/Chatbot";
 import BehaviorTracking from "@/components/integrations/BehaviorTracking";
+import JsonLd from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site.config";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "Sapper Consulting | B2B Pipeline Generation",
     template: "%s | Sapper Consulting",
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     title: "Sapper Consulting | B2B Pipeline Generation",
     description:
       "We generate consistent B2B sales meetings through strategic omni-channel outreach.",
-    url: "https://www.sapperconsulting.com",
+    url: siteConfig.url,
     siteName: "Sapper Consulting",
     type: "website",
   },
@@ -81,6 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <CookieBanner />
 
         {/* Integrations */}
+        <JsonLd />
         <ChiliPiperLoader />
         <BookingModal />
         <Chatbot />
