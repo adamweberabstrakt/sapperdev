@@ -1,3 +1,6 @@
+import { sanityEnabled } from "@/sanity/config";
+import { fetchAllPosts, fetchPost } from "@/sanity/blog";
+
 /**
  * Static blog data — shaped to map cleanly onto Sanity later.
  * Each post's `content` is an array of blocks (a mini portable-text), so swapping
@@ -30,6 +33,7 @@ export type BlogPost = {
   date: string; // ISO
   readTime: string;
   featured?: boolean;
+  coverImage?: string;
   content: Block[];
 };
 
@@ -170,13 +174,32 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-// Helpers (Sanity-swappable)
-export const getAllPosts = () =>
+// Helpers — async so they can read from Sanity when configured, else fall back
+// to the static POSTS above. CATEGORIES stay static (fixed brand buckets).
+const staticSorted = () =>
   [...POSTS].sort((a, b) => +new Date(b.date) - +new Date(a.date));
-export const getPost = (slug: string) => POSTS.find((p) => p.slug === slug);
-export const getPostsByCategory = (cat: BlogCategory) =>
-  getAllPosts().filter((p) => p.category === cat);
-export const getFeatured = () => POSTS.find((p) => p.featured) ?? getAllPosts()[0];
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  if (sanityEnabled) {
+    const remote = await fetchAllPosts();
+    if (remote && remote.length) return remote;
+  }
+  return staticSorted();
+}
+export async function getPost(slug: string): Promise<BlogPost | undefined> {
+  if (sanityEnabled) {
+    const remote = await fetchPost(slug);
+    if (remote) return remote;
+  }
+  return POSTS.find((p) => p.slug === slug);
+}
+export async function getPostsByCategory(cat: BlogCategory): Promise<BlogPost[]> {
+  return (await getAllPosts()).filter((p) => p.category === cat);
+}
+export async function getFeatured(): Promise<BlogPost> {
+  const all = await getAllPosts();
+  return all.find((p) => p.featured) ?? all[0];
+}
 export const getCategory = (slug: string) => CATEGORIES.find((c) => c.slug === slug);
 export const categoryLabel = (slug: BlogCategory) => getCategory(slug)?.label ?? slug;
 export const fmtDate = (iso: string) =>

@@ -4,21 +4,22 @@ import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
 import PostBody from "@/components/blog/PostBody";
 import PostCard, { PostCardMedia } from "@/components/blog/PostCard";
-import { POSTS, getPost, getPostsByCategory, categoryLabel, fmtDate } from "@/lib/blog";
+import { getAllPosts, getPost, getPostsByCategory, categoryLabel, fmtDate } from "@/lib/blog";
 
-export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug);
   return post ? { title: post.title, description: post.excerpt } : { title: "Blog" };
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug);
   if (!post) notFound();
-  const related = getPostsByCategory(post.category).filter((p) => p.slug !== post.slug).slice(0, 3);
+  const related = (await getPostsByCategory(post.category)).filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <>
@@ -39,7 +40,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       {/* MEDIA */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <PostCardMedia category={categoryLabel(post.category)} large />
+        <PostCardMedia category={categoryLabel(post.category)} image={post.coverImage} large />
       </div>
 
       {/* BODY */}

@@ -10,9 +10,9 @@ export const metadata = {
     "Field notes on B2B outbound — research, client success, news, and press from Sapper Consulting.",
 };
 
-export default function Blog() {
-  const featured = getFeatured();
-  const posts = getAllPosts().filter((p) => p.slug !== featured.slug);
+export default async function Blog() {
+  const featured = await getFeatured();
+  const posts = (await getAllPosts()).filter((p) => p.slug !== featured.slug);
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function Blog() {
         <div className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
           <AnimateIn>
             <Link href={`/blog/${featured.slug}`} className="group grid items-center gap-8 border-t-2 border-acid bg-panel p-6 lg:grid-cols-2 lg:p-8">
-              <PostCardMedia category={categoryLabel(featured.category)} large />
+              <PostCardMedia category={categoryLabel(featured.category)} image={featured.coverImage} large />
               <div>
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-acid">Featured · {categoryLabel(featured.category)}</span>
                 <h2 className="mt-4 font-display text-3xl uppercase leading-[0.98] text-bone transition-colors group-hover:text-acid sm:text-4xl">{featured.title}</h2>

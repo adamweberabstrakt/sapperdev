@@ -15,10 +15,10 @@ export function generateMetadata({ params }: { params: { category: string } }) {
     : { title: "Blog" };
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
+export default async function CategoryPage({ params }: { params: { category: string } }) {
   const cat = getCategory(params.category);
   if (!cat) notFound();
-  const posts = getPostsByCategory(cat.slug as BlogCategory);
+  const posts = await getPostsByCategory(cat.slug as BlogCategory);
 
   return (
     <>

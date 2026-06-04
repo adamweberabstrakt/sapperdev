@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site.config";
-import { POSTS, CATEGORIES } from "@/lib/blog";
+import { CATEGORIES, getAllPosts } from "@/lib/blog";
 import { CASE_STUDIES_DETAILED } from "@/lib/caseStudies";
 
 const STATIC_ROUTES = [
@@ -11,7 +11,7 @@ const STATIC_ROUTES = [
   "/about", "/team", "/contact", "/blog", "/privacy-policy", "/terms-of-use",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
   const now = new Date();
   const entries: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
@@ -23,7 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   CATEGORIES.forEach((c) =>
     entries.push({ url: `${base}/blog/category/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.5 })
   );
-  POSTS.forEach((p) =>
+  const posts = await getAllPosts();
+  posts.forEach((p) =>
     entries.push({ url: `${base}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: "monthly", priority: 0.6 })
   );
   CASE_STUDIES_DETAILED.forEach((cs) =>
