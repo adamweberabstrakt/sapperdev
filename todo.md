@@ -349,3 +349,19 @@ only remaining cause is ChiliPiper-side config:
   - Confirm the form's email field name maps (currently name="email").
 
 ## Old/orphaned (left valid, unused): ChiliPiperInline.tsx
+
+---
+
+# Update — Booking switched to ChiliPiper SMART LINK iframe (reliable path)
+
+## Status: SHIPPED + verified live
+- [x] site.config integrations.bookingUrl = https://abstraktmg.chilipiper.com/round-robin/sapper-demo
+- [x] BookingCalendar: iframes the smart link (verified: no X-Frame-Options /
+      frame-ancestors, embeds cleanly). Listens for ChiliPiper "booking-confirmed"
+      postMessage (origin *.chilipiper.com) -> GTM meeting_booked.
+- [x] /contact renders the calendar inline (iframe src confirmed live).
+- [x] BookingButton -> opens modal -> calendar iframe (max-w-3xl, ~600px).
+- Why this over deploy/router: self-contained booking page, no form, no domain
+  allowlist dependency. Change the meeting type later by editing bookingUrl only.
+
+## Orphaned (left valid, unused): BookingForm.tsx, ChiliPiperInline.tsx
