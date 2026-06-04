@@ -183,3 +183,32 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Confirm ChiliPiper inline render; finish GTM conversion config (4 events)
 - [ ] Case study landing, blog archive, blog layout (after Sanity)
 - [ ] Wire Sanity (deferred); then blog
+
+---
+
+# Update — Team page + interactive TeamLogic IT case study
+
+## Status: SHIPPED to production
+- [x] /team — featured GM Amie Milner (head) + Tony Auck, Natalie Archer, Jeff Winters
+      ID-badge avatars, 400+/St Louis band, "full team on LinkedIn" -> company page
+- [x] src/lib/team.ts — scalable roster; per-person `linkedin` rendered only when set
+- [x] /results/team-logic-it — interactive: animated count-up gauge (70%) +
+      clickable case-file tabs (Challenge / Why Sapper / Experience) + quotes
+- [x] Featured card on /results linking to the case study
+- [x] Clean build (24 pages), pushed to main
+
+## Team roster — NEEDS YOUR INPUT (cannot scrape LinkedIn)
+- LinkedIn blocks automated access + scraping violates their ToS, so the 22
+  employees can't be pulled programmatically. Did NOT invent names/titles/profile
+  URLs for real people (would be false info about identifiable individuals).
+- To populate the full roster + individual profile links: paste name / title /
+  LinkedIn URL for each person -> drops straight into src/lib/team.ts and renders.
+
+## ChiliPiper buttons not opening — ROOT CAUSE FOUND
+- concierge.js loads (HTTP 200) and exposes ChiliPiper.submit(domain, router) with
+  a call queue — so script + API + timing are all fine.
+- Blocker: the router slug `sapper_router_1` is the PLACEHOLDER from the original
+  repo (flagged day one). submit() has no valid router to open -> click falls through.
+- FIX (one line): replace integrations.chilipiperRouter in src/config/site.config.ts
+  with the real Concierge router slug from ChiliPiper admin (confirm domain = abstraktmg).
+  Fixes every booking button AND the inline /contact embed at once.
