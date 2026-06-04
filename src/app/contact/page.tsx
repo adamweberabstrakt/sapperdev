@@ -64,17 +64,20 @@ export default function Contact() {
             </AnimateIn>
 
             {/* Right: inline calendar */}
-            <AnimateIn delay={0.12}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">
-                Direct Booking / Secure Channel
-              </p>
-              <h2 className="mt-4 font-display text-3xl uppercase leading-[0.98] sm:text-4xl">
-                Lock a <span className="text-acid">time.</span>
-              </h2>
-              <div className="mt-6">
+            <div>
+              <AnimateIn delay={0.12}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">
+                  Direct Booking / Secure Channel
+                </p>
+                <h2 className="mt-4 font-display text-3xl uppercase leading-[0.98] sm:text-4xl">
+                  Lock a <span className="text-acid">time.</span>
+                </h2>
+              </AnimateIn>
+              {/* iframe kept OUT of the Framer transform: transformed ancestors swallow iframe clicks */}
+              <div className="relative z-10 mt-6">
                 <BookingCalendar className="h-[620px] w-full overflow-hidden border border-steel/20" />
               </div>
-            </AnimateIn>
+            </div>
           </div>
         </div>
       </section>
