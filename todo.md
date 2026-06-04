@@ -453,3 +453,11 @@ only remaining cause is ChiliPiper-side config:
 - Create Sanity project, add schemas from sanity-studio/README.md, set env vars in Vercel,
   add CORS origin, publish posts. Site switches automatically (60s ISR).
 - Optional: confirm Alexandra Guarino's LinkedIn URL to fill the last team profile.
+
+## Review — Team dossier profile pages
+- Added dossier fields to `src/lib/team.ts` (slug, codename, summary, location, education, strengths[], focus[], dossier[], weakness) + `getMember()`. All 6 leaders given slugs + drafted content from LinkedIn/roles.
+- New `src/app/team/[slug]/page.tsx`: tactical "personnel file" — ID badge, field summary, strengths + areas of operation, service record, playful "known weakness," comms/channels, and an **authorship hub** ("Intel Filed by [name]") listing on-site posts where `post.author === member.name` (empty-state when none). generateStaticParams + generateMetadata.
+- `src/app/team/page.tsx`: names now link to dossiers; each card shows "View dossier →" + LinkedIn.
+- `src/app/sitemap.ts`: added all 6 `/team/[slug]` URLs.
+- Build green; live 200s verified. **Site now = 44 content pages** (38 + 6 dossiers).
+- NOTE: strengths + weaknesses are drafted placeholders for client review. Authored-post links: Amie, Jeff, Tony each have 1 post today; the other three show the empty state until they have a byline.
