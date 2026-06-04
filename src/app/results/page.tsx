@@ -91,6 +91,30 @@ export default function Results() {
             Missions on <span className="text-acid">record.</span>
           </h2>
         </AnimateIn>
+
+        {/* Featured interactive case file */}
+        <AnimateIn delay={0.05}>
+          <Link
+            href="/results/team-logic-it"
+            className="group mt-10 flex flex-col justify-between gap-6 border-t-2 border-acid bg-panel p-8 transition-colors hover:bg-panel/70 sm:flex-row sm:items-center"
+          >
+            <div>
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-acid">
+                Featured Case File / Interactive
+              </span>
+              <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] sm:text-3xl">
+                TeamLogic IT — 70% of annual sales from Sapper leads
+              </h3>
+              <p className="mt-3 max-w-2xl text-sm text-bone/70">
+                A managed IT franchise with no sales background — and how the operation landed its two highest-paying clients.
+              </p>
+            </div>
+            <span className="shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-steel transition-colors group-hover:text-acid">
+              Open the file →
+            </span>
+          </Link>
+        </AnimateIn>
+
         <div className="mt-12 grid gap-px border border-steel/20 bg-steel/20 sm:grid-cols-2 lg:grid-cols-3">
           {CASE_STUDIES_DETAILED.map((cs, i) => (
             <AnimateIn key={cs.slug} delay={i * 0.07} className="h-full bg-ink">
