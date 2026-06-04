@@ -27,7 +27,6 @@ export default function ChiliPiperInline() {
             siteConfig.integrations.chilipiperRouter,
             {
               domElement: ref.current,
-              lead: { PersonEmail: "" },
               onSuccess: () => {
                 win.dataLayer = win.dataLayer || [];
                 win.dataLayer.push({ event: "meeting_booked" });

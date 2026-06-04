@@ -1,117 +1,99 @@
 import Image from "next/image";
 import Link from "next/link";
+import BookingButton from "@/components/ui/BookingButton";
+import { siteConfig } from "@/config/site.config";
 
-const footerLinks = {
-  services: [
-    { name: "B2B Appointment Setting", href: "/b2b-appointment-setting" },
-    { name: "B2B Cold Calling", href: "/b2b-cold-calling" },
-    { name: "Cold Email Marketing", href: "/cold-email-marketing" },
-    { name: "B2B LinkedIn Outreach", href: "/b2b-linkedin-outreach" },
-  ],
-  company: [
-    { name: "About", href: "/about" },
-    { name: "Team", href: "/team" },
-    { name: "Results", href: "/results" },
-    { name: "Contact", href: "/contact" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy-policy" },
-    { name: "Terms of Use", href: "/terms-of-use" },
-  ],
-};
+const COLUMNS = [
+  {
+    label: "Solutions",
+    links: [
+      { name: "Appointment Setting", href: "/b2b-appointment-setting" },
+      { name: "Account-Based Marketing", href: "/account-based-marketing" },
+      { name: "Demand Generation", href: "/demand-generation" },
+      { name: "Lead Qualification", href: "/lead-qualification" },
+    ],
+  },
+  {
+    label: "Tactics",
+    links: [
+      { name: "Cold Calling", href: "/b2b-cold-calling" },
+      { name: "Cold Email", href: "/cold-email-marketing" },
+      { name: "LinkedIn Outreach", href: "/b2b-linkedin-outreach" },
+      { name: "Direct Mail", href: "/b2b-direct-mail" },
+      { name: "Data Enrichment", href: "/data-enrichment" },
+    ],
+  },
+  {
+    label: "Company",
+    links: [
+      { name: "The HIT Method", href: "/process" },
+      { name: "Industries", href: "/industries" },
+      { name: "Results", href: "/results" },
+      { name: "About", href: "/about" },
+      { name: "Team", href: "/team" },
+      { name: "Contact", href: "/contact" },
+    ],
+  },
+];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="border-t-2 border-acid bg-ink text-bone">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <Image
-              src="/images/sapper-logo-light.png"
-              alt="Sapper"
-              width={150}
-              height={32}
-              className="mb-4 h-8 w-auto"
-            />
-            <p className="text-sm text-white/60 leading-relaxed">
-              Generating consistent B2B sales meetings through strategic
-              omni-channel outreach.
+            <Image src="/images/sapper-logo-light.png" alt="Sapper" width={150} height={32} className="h-8 w-auto" />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-bone/55">
+              {"One coordinated pursuit of the accounts you've always wanted — B2B appointment setting built on a verified, intent-scored dream-ICP target list."}
             </p>
+            <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
+              {`${siteConfig.location.basedIn} · ${siteConfig.location.teamSize} in ${siteConfig.location.city}`}
+            </p>
+            <div className="mt-4 flex gap-5 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-acid">LinkedIn ↗</a>
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-acid">Facebook ↗</a>
+            </div>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">
-              Services
-            </h3>
-            <ul className="space-y-2.5">
-              {footerLinks.services.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/70 hover:text-cyan transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link columns */}
+          {COLUMNS.map((col) => (
+            <div key={col.label}>
+              <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-acid">{col.label}</h3>
+              <ul className="mt-5 space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-bone/65 transition-colors hover:text-bone">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          {/* Company */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">
-              Company
-            </h3>
-            <ul className="space-y-2.5">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/70 hover:text-cyan transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        {/* Contact + CTA strip */}
+        <div className="mt-12 flex flex-col gap-6 border-t border-steel/20 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap gap-x-8 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
+            <a href={siteConfig.contact.phoneHref} className="transition-colors hover:text-acid">{siteConfig.contact.phone}</a>
+            <a href={`mailto:${siteConfig.contact.email}`} className="transition-colors hover:text-acid">{siteConfig.contact.email}</a>
           </div>
-
-          {/* CTA + Legal */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">
-              Get Started
-            </h3>
-            <Link
-              href="/contact"
-              className="inline-block bg-cyan text-navy text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-cyan/90 transition-colors mb-6"
-            >
-              Book a Meeting
-            </Link>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-white/40 hover:text-white/60 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <BookingButton>Book a strategy call</BookingButton>
         </div>
       </div>
 
-      {/* Copyright bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <p className="text-xs text-white/30 text-center">
-            &copy; {new Date().getFullYear()} Sapper Consulting. All rights
-            reserved. A division of Abstrakt Marketing Group.
+      {/* Bottom bar */}
+      <div className="border-t border-steel/20">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-steel/70">
+            © {year} Sapper Consulting · A division of Abstrakt Marketing Group
           </p>
+          <div className="flex gap-6 font-mono text-[11px] uppercase tracking-[0.16em] text-steel/70">
+            <Link href="/privacy-policy" className="transition-colors hover:text-bone">Privacy</Link>
+            <Link href="/terms-of-use" className="transition-colors hover:text-bone">Terms</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -12,11 +12,12 @@ interface BookingButtonProps {
 }
 
 /**
- * Single CTA used everywhere a "book a meeting" action is needed.
- * Opens the ChiliPiper router (no form). On a successful booking it pushes a
- * GTM dataLayer event ("meeting_booked") so booking can be the tracked
- * conversion. If ChiliPiper isn't available yet, it falls back to /contact so
- * a CTA is never dead.
+ * Single CTA wherever a "book a meeting" action is needed.
+ * Opens the ChiliPiper Concierge router popup, which collects the prospect's
+ * details and routes them. On a successful booking it pushes a GTM
+ * "meeting_booked" event. We do NOT pass an empty lead (that breaks routing)
+ * and we do NOT redirect on error (that was sending clicks to /contact).
+ * The only fallback is /contact if the ChiliPiper script never loaded.
  */
 export default function BookingButton({
   children,
@@ -26,31 +27,29 @@ export default function BookingButton({
   const handleBook = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const win = window as Record<string, any>;
-    // Soft-conversion: user opened the booking flow.
     win.dataLayer = win.dataLayer || [];
     win.dataLayer.push({ event: "booking_started" });
-    try {
-      if (win.ChiliPiper?.submit) {
+
+    if (win.ChiliPiper?.submit) {
+      try {
         win.ChiliPiper.submit(
           SITE_CONFIG.chilipiper.domain,
           SITE_CONFIG.chilipiper.router,
           {
             trigger: "RouterLink",
-            lead: { PersonEmail: "" },
             onSuccess: () => {
               win.dataLayer = win.dataLayer || [];
               win.dataLayer.push({ event: "meeting_booked" });
             },
-            onError: () => {
-              window.location.href = "/contact";
-            },
           }
         );
-        return;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error("ChiliPiper submit failed", e);
       }
-    } catch {
-      // fall through to the safe fallback below
+      return;
     }
+
     window.location.href = "/contact";
   };
 
