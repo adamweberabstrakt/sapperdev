@@ -128,3 +128,27 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 ## Notes
 - "this page" interpreted as Leadium /services/inbound-lead-qualification (confirm).
 - Footer logo set to light as a sensible default — change if you want lime there too.
+
+---
+
+# Update — Service pages + PMax soft conversions
+
+## Status: SHIPPED to production
+- [x] /b2b-cold-calling, /cold-email-marketing, /b2b-linkedin-outreach (v2 pattern)
+- [x] BehaviorTracking component (root layout): fires once per session
+      - engaged_pageviews  (more than 3 page views)
+      - engaged_time       (more than 60 seconds on site)
+- [x] BookingButton now fires booking_started (open) + meeting_booked (success)
+- [x] Clean build (23 pages); pushed to main
+
+## dataLayer events now available for GTM (event names)
+- meeting_booked   (HARD conversion — ChiliPiper booking success)
+- booking_started  (soft — booking modal opened)
+- engaged_pageviews(soft — >3 pageviews/session)
+- engaged_time     (soft — >60s/session)
+
+## Still to do (next sessions)
+- [ ] GTM: create Custom Event triggers + GA4 event tags for the 4 events; mark key events
+- [ ] Google Ads: meeting_booked = PRIMARY; others = SECONDARY (PMax training signal)
+- [ ] Case study landing page, blog archive, blog post layout
+- [ ] Decide headless CMS + framework (Astro vs stay on Next) BEFORE building blog
