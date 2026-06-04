@@ -212,3 +212,29 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - FIX (one line): replace integrations.chilipiperRouter in src/config/site.config.ts
   with the real Concierge router slug from ChiliPiper admin (confirm domain = abstraktmg).
   Fixes every booking button AND the inline /contact embed at once.
+
+---
+
+# Update — Data enrichment + 3 service pages + Data Loop process page
+
+## Status: SHIPPED to production (29 routes)
+- [x] /data-enrichment — landing: capture website traffic data -> named targets ->
+      activate across channels. Mechanism (visitor-resolution method) intentionally
+      NOT explained, per direction. Problem -> steps -> channels -> proof -> FAQ -> CTA.
+- [x] /account-based-marketing — ABM service page (v2 pattern)
+- [x] /demand-generation — Demand Gen service page (v2 pattern)
+- [x] /b2b-direct-mail — Direct Mail service page (v2 pattern)
+- [x] /process — interactive Data Loop: auto-cycling + clickable stages
+      (Generate -> Capture & Enrich -> Match & Activate -> Compound) around a Data Core,
+      + "Outbound, run like sales ops" edge section (data quality / coordinated / compounds)
+- [x] Nav: 4 new services added to dropdown + top-level Process link
+- [x] Clean build, pushed to main
+
+## Note
+- Navbar/Footer still use legacy v1 styling (navy/white/cyan) while all pages are v2
+  (ink/acid). Optional: align nav/footer to v2 for full cohesion.
+
+## Still open
+- [ ] ChiliPiper real router slug -> site.config.ts (user retrieving) — fixes all booking
+- [ ] Team roster (name/title/LinkedIn) -> src/lib/team.ts
+- [ ] Sanity wiring -> blog archive + post layout
