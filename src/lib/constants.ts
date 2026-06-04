@@ -1,23 +1,47 @@
 import { siteConfig } from "@/config/site.config";
 
-export const NAV_LINKS = [
+type NavChild = { name: string; href: string };
+type NavItem = {
+  name: string;
+  href: string;
+  children?: NavChild[];
+  groups?: { label: string; items: NavChild[] }[];
+  feature?: { label: string; desc: string; href: string };
+};
+
+export const NAV_LINKS: NavItem[] = [
   { name: "Home", href: "/" },
   {
-    name: "Services",
+    name: "Appointment Setting",
     href: "/b2b-appointment-setting",
-    children: [
-      { name: "B2B Appointment Setting", href: "/b2b-appointment-setting" },
-      { name: "B2B Cold Calling", href: "/b2b-cold-calling" },
-      { name: "Cold Email Marketing", href: "/cold-email-marketing" },
-      { name: "B2B LinkedIn Outreach", href: "/b2b-linkedin-outreach" },
-      { name: "B2B Direct Mail", href: "/b2b-direct-mail" },
-      { name: "Account-Based Marketing", href: "/account-based-marketing" },
-      { name: "Demand Generation", href: "/demand-generation" },
-      { name: "Lead Qualification", href: "/lead-qualification" },
-      { name: "Data Enrichment", href: "/data-enrichment" },
+    groups: [
+      {
+        label: "Solutions",
+        items: [
+          { name: "Appointment Setting", href: "/b2b-appointment-setting" },
+          { name: "Account-Based Marketing", href: "/account-based-marketing" },
+          { name: "Demand Generation", href: "/demand-generation" },
+          { name: "Lead Qualification", href: "/lead-qualification" },
+        ],
+      },
+      {
+        label: "Tactics",
+        items: [
+          { name: "Cold Calling", href: "/b2b-cold-calling" },
+          { name: "Cold Email", href: "/cold-email-marketing" },
+          { name: "LinkedIn Outreach", href: "/b2b-linkedin-outreach" },
+          { name: "Direct Mail", href: "/b2b-direct-mail" },
+          { name: "Data Enrichment", href: "/data-enrichment" },
+        ],
+      },
     ],
+    feature: {
+      label: "The HIT Method",
+      desc: "How the pursuit works — six stages, one target list.",
+      href: "/process",
+    },
   },
-  { name: "Process", href: "/process" },
+  { name: "Industries", href: "/industries" },
   { name: "Results", href: "/results" },
   { name: "About", href: "/about" },
   { name: "Team", href: "/team" },
