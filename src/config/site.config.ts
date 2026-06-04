@@ -35,6 +35,7 @@ export const siteConfig = {
     chilipiperDomain: "abstraktmg",
     chilipiperRouter: "sapper_router_1",
     gtmId: "GTM-MQLB3J4",
+    bookingUrl: "https://abstraktmg.chilipiper.com/round-robin/sapper-demo",
   },
 
   // Headline proof stats reused across pages — change once, updates everywhere.
