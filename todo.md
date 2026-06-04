@@ -279,3 +279,26 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Individual industry pages (later, likely programmatic: solution × industry)
 - [ ] Per-person LinkedIn URLs for team (leadership page exposes none)
 - [ ] Verify ChiliPiper buttons now open (trigger fix shipped)
+
+---
+
+# Update — ChiliPiper /contact bounce fix + v2 footer
+
+## Status: SHIPPED
+- [x] BookingButton: removed empty PersonEmail lead (broke routing) + removed onError
+      -> /contact redirect (was the bounce). Now opens the Concierge popup; only
+      falls back to /contact if the script is genuinely absent (it isn't).
+- [x] ChiliPiperInline: dropped empty lead too.
+- [x] Footer rebuilt in v2 (ink/acid, border-acid top): Solutions / Tactics / Company
+      columns, contact + LinkedIn/Facebook from site.config, working Book-a-call CTA,
+      Abstrakt division line + Privacy/Terms.
+
+## If buttons STILL don't open (next diagnostic)
+- New behavior should be: click opens popup. If instead nothing happens (no /contact),
+  submit is firing but not rendering -> likely router config; try dropping `trigger`
+  or confirm router "sapper_router_1" is published/Concierge-type in ChiliPiper admin.
+
+## Next candidates
+- [ ] Restyle Navbar to v2 (footer now done; navbar still legacy navy/cyan)
+- [ ] Align /b2b-appointment-setting hero to the HIT Method PDF
+- [ ] Per-person team LinkedIn URLs
