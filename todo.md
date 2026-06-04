@@ -365,3 +365,13 @@ only remaining cause is ChiliPiper-side config:
   allowlist dependency. Change the meeting type later by editing bookingUrl only.
 
 ## Orphaned (left valid, unused): BookingForm.tsx, ChiliPiperInline.tsx
+
+---
+
+# Update — Fix: booking calendar rendered but not clickable
+- Cause: the iframe sat inside AnimateIn (a Framer Motion motion.div). Transformed
+  ancestors make iframes render but reject pointer events.
+- Fix: kept the heading animation, moved the calendar iframe into a plain
+  relative z-10 container (no transform ancestor). /contact + modal unaffected otherwise.
+- If still not interactive: (1) dismiss the cookie bar (covers bottom strip),
+  (2) possible ChiliPiper domain-gating of embeds, (3) fallback = open smart link in new tab.
