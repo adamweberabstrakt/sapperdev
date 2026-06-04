@@ -152,3 +152,34 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Google Ads: meeting_booked = PRIMARY; others = SECONDARY (PMax training signal)
 - [ ] Case study landing page, blog archive, blog post layout
 - [ ] Decide headless CMS + framework (Astro vs stay on Next) BEFORE building blog
+
+---
+
+# Update — site.config consolidation + About + Contact
+
+## Status: SHIPPED to production
+- [x] src/config/site.config.ts — SINGLE SOURCE OF TRUTH for per-site values
+      (brand, contact, location, social, integrations, stats, brand tokens, fonts)
+- [x] Tailwind tokens, SITE_CONFIG, SITE_STATS, ChiliPiper, GTM id all sourced from it
+- [x] Deduped proof stats (appointment/results/lead-qual) -> SITE_STATS
+- [x] About page: Sapper content in Belkins flow (mission/vision, values, timeline,
+      why, US-based/400+/St Louis), v2 design
+- [x] Contact page: animated radar target-acquisition console (TargetRadar) +
+      inline ChiliPiper calendar (ChiliPiperInline) with popup fallback;
+      US-based/400+/St Louis messaging, config-driven contact details
+- [x] Clean build (23 pages); pushed to main
+
+## Framework note
+- site.config.ts is the boundary for templating: a new brand overrides this one file
+  (+ logo assets + its own Sanity dataset). Components stay generic.
+
+## ChiliPiper inline — needs confirmation
+- Inline embed uses concierge submit({ domElement }). If your router needs a form to
+  route, ChiliPiper will render that form inline (still in-page, not a popup).
+- Verify it renders as expected on /contact; if your account uses a different inline
+  embed/meeting link, send it and it's a one-component swap. Fallback = popup button.
+
+## Still to do
+- [ ] Confirm ChiliPiper inline render; finish GTM conversion config (4 events)
+- [ ] Case study landing, blog archive, blog layout (after Sanity)
+- [ ] Wire Sanity (deferred); then blog
