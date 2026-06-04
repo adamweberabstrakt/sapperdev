@@ -421,3 +421,19 @@ only remaining cause is ChiliPiper-side config:
       PRIVACY_EMAIL is a placeholder (live site obfuscates it) -> CONFIRM/REPLACE.
 - [ ] Terms of Use: live sapperconsulting.com has NO terms page (site: search empty; footer only
       links Privacy + Sitemap). Options: draft a standard TOS for legal review, or leave placeholder.
+
+---
+
+# Update — Terms of Use drafted + privacy email set
+- [x] /terms-of-use: standard website TOS (12 sections, governing law = Missouri/St. Louis).
+      v2-styled, config-driven. In-code note: template — have counsel review before relying on it.
+- [x] Privacy contact email set to info@sapperconsulting.com (privacy + terms).
+- Both legal pages are now real content (no more placeholders). Live + in sitemap.
+
+# PRODUCTION CHECKLIST — remaining
+- [ ] Counsel review of TOS; confirm privacy policy specifics.
+- [ ] Production domain + update siteConfig.url (sitemap/robots/OG/schema follow automatically).
+- [ ] ChiliPiper: set assignee availability so booking slots show.
+- [ ] Wire Sanity to blog model + real posts/cover images; per-person team LinkedIn URLs.
+- [ ] Decide on orphaned /api/contact (Resend) route; GTM->GA4 conversion config; a11y pass.
+- [ ] Optional: drop unused concierge.js loader. Revoke GitHub PAT at handoff.
