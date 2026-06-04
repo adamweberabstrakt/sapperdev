@@ -1,12 +1,15 @@
 "use client";
 
 import Script from "next/script";
+import { siteConfig } from "@/config/site.config";
+
+const { chilipiperDomain, chilipiperRouter } = siteConfig.integrations;
 
 export default function ChiliPiperLoader() {
   return (
     <Script
       id="chilipiper-concierge"
-      src="https://abstraktmg.chilipiper.com/concierge-js/cjs/concierge.js"
+      src={`https://${chilipiperDomain}.chilipiper.com/concierge-js/cjs/concierge.js`}
       strategy="afterInteractive"
       crossOrigin="anonymous"
     />
@@ -23,7 +26,7 @@ export function fireChiliPiper(formData: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const win = window as Record<string, any>;
   if (typeof window !== "undefined" && win.ChiliPiper) {
-    win.ChiliPiper.submit("abstraktmg", "sapper_router_1", {
+    win.ChiliPiper.submit(chilipiperDomain, chilipiperRouter, {
       map: true,
       lead: {
         FirstName: formData.name.split(" ")[0],

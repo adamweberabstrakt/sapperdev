@@ -1,3 +1,4 @@
+import { SITE_STATS } from "@/lib/constants";
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
@@ -9,12 +10,7 @@ export const metadata = {
     "Speed-to-lead qualification with military precision. Sapper intercepts, identifies, scores, and qualifies every inbound lead against your ICP — so only confirmed, sales-ready targets reach your closers.",
 };
 
-const PROOF = [
-  { num: "2,000", suffix: "+", label: "Clients" },
-  { num: "80", suffix: "+", label: "Industries" },
-  { num: "50", suffix: "", label: "States" },
-  { num: "500K", suffix: "+", label: "Meetings Booked" },
-];
+const PROOF = SITE_STATS;
 
 const PROCESS = [
   { n: "01", title: "Intercept", desc: "Every inbound lead is captured the moment it lands — forms, ads, chat, calls — around the clock." },

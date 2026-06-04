@@ -6,6 +6,7 @@ import CookieBanner from "@/components/layout/CookieBanner";
 import ChiliPiperLoader from "@/components/integrations/ChiliPiper";
 import Chatbot from "@/components/integrations/Chatbot";
 import BehaviorTracking from "@/components/integrations/BehaviorTracking";
+import { siteConfig } from "@/config/site.config";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -59,14 +60,14 @@ export default function RootLayout({
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MQLB3J4');`}
+})(window,document,'script','dataLayer','${siteConfig.integrations.gtmId}');`}
         </Script>
       </head>
       <body className="bg-white text-navy font-sans">
         {/* GTM noscript */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MQLB3J4"
+            src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.integrations.gtmId}`}
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}

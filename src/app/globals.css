@@ -43,3 +43,32 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* Contact — radar / target-acquisition animation */
+@keyframes radar-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes radar-ping {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+.animate-radar-ping {
+  animation: radar-ping 2.2s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-radar-sweep,
+  .animate-radar-ping {
+    animation: none;
+  }
+}

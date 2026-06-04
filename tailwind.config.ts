@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { siteConfig } from "./src/config/site.config";
 
 const config: Config = {
   content: [
@@ -14,17 +15,13 @@ const config: Config = {
         cyan: "#00D0FF",
         purple: "#A82EFF",
         "light-gray": "#F4F4F4",
-        // Brand Standards v2 — "HIT / tactical dossier"
-        ink: "#0B1B30",
-        panel: "#11243D",
-        acid: "#B6F22B",
-        steel: "#6B829E",
-        bone: "#F5F7FA",
+        // Brand v2 tokens — sourced from site config (single source of truth)
+        ...siteConfig.brandColors,
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Anton", "Impact", "sans-serif"],
-        mono: ["'Space Mono'", "ui-monospace", "monospace"],
+        sans: [...siteConfig.fonts.sans],
+        display: [...siteConfig.fonts.display],
+        mono: [...siteConfig.fonts.mono],
       },
     },
   },

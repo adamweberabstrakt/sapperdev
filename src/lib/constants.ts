@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site.config";
+
 export const NAV_LINKS = [
   { name: "Home", href: "/" },
   {
@@ -71,13 +73,17 @@ export const CASE_STUDIES = [
   },
 ];
 
+// Derived from the single site config (kept for backward-compatible imports).
 export const SITE_CONFIG = {
-  name: "Sapper Consulting",
-  tagline: "B2B Pipeline Generation",
-  email: "adam.weber@abstraktmg.com",
+  name: siteConfig.name,
+  tagline: siteConfig.tagline,
+  email: siteConfig.contact.email,
   chilipiper: {
-    domain: "abstraktmg",
-    router: "sapper_router_1",
+    domain: siteConfig.integrations.chilipiperDomain,
+    router: siteConfig.integrations.chilipiperRouter,
   },
-  gtmId: "GTM-MQLB3J4",
+  gtmId: siteConfig.integrations.gtmId,
 };
+
+// Headline proof stats — single source of truth lives in site.config.
+export const SITE_STATS = siteConfig.stats;

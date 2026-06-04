@@ -1,3 +1,4 @@
+import { SITE_STATS } from "@/lib/constants";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import BookingButton from "@/components/ui/BookingButton";
@@ -11,12 +12,7 @@ export const metadata = {
     "B2B appointment setting built on verified, intent-scored target lists. Sapper books qualified, ICP-fit meetings to your calendar through coordinated calling, email, LinkedIn, and direct mail.",
 };
 
-const PROOF = [
-  { num: "2,000", suffix: "+", label: "Clients" },
-  { num: "80", suffix: "+", label: "Industries" },
-  { num: "50", suffix: "", label: "States" },
-  { num: "500K", suffix: "+", label: "Meetings Booked" },
-];
+const PROOF = SITE_STATS;
 
 const DIFFERENTIATORS = [
   "Verified, intent-scored target lists — not bought and cloned.",

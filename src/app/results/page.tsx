@@ -1,3 +1,4 @@
+import { SITE_STATS } from "@/lib/constants";
 import Link from "next/link";
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
@@ -11,12 +12,7 @@ export const metadata = {
     "Real Sapper client results across 80+ industries: booked meetings, recurring revenue, and closed deals from coordinated outbound built on verified target lists.",
 };
 
-const STATS = [
-  { num: "2,000", suffix: "+", label: "Clients" },
-  { num: "80", suffix: "+", label: "Industries" },
-  { num: "50", suffix: "", label: "States" },
-  { num: "500K", suffix: "+", label: "Meetings Booked" },
-];
+const STATS = SITE_STATS;
 
 const TESTIMONIALS = [
   { quote: "Our ROI has continued to be above 5 to 1 on revenue to expenses — we are now in our fourth year.", name: "Gary S.", role: "Rick Consulting Partners" },
