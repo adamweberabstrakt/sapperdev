@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site.config";
 import { CATEGORIES, getAllPosts } from "@/lib/blog";
 import { CASE_STUDIES_DETAILED } from "@/lib/caseStudies";
+import { TEAM } from "@/lib/team";
 
 const STATIC_ROUTES = [
   "", "/b2b-appointment-setting", "/account-based-marketing", "/demand-generation",
@@ -29,6 +30,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
   CASE_STUDIES_DETAILED.forEach((cs) =>
     entries.push({ url: `${base}/results/${cs.slug}`, lastModified: now, changeFrequency: "monthly", priority: 0.6 })
+  );
+  TEAM.filter((m) => m.slug).forEach((m) =>
+    entries.push({ url: `${base}/team/${m.slug}`, lastModified: now, changeFrequency: "monthly", priority: 0.5 })
   );
   return entries;
 }

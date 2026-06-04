@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
 import { TEAM, type TeamMember } from "@/lib/team";
@@ -35,10 +36,32 @@ function ProfileLink({ m }: { m: TeamMember }) {
       href={m.linkedin}
       target="_blank"
       rel="noopener noreferrer"
-      className="mt-4 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-steel transition-colors hover:text-acid"
+      className="inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-steel transition-colors hover:text-acid"
     >
       LinkedIn ↗
     </a>
+  );
+}
+
+function DossierLink({ m }: { m: TeamMember }) {
+  if (!m.slug) return null;
+  return (
+    <Link
+      href={`/team/${m.slug}`}
+      className="inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-acid transition-colors hover:text-bone"
+    >
+      View dossier →
+    </Link>
+  );
+}
+
+function Links({ m }: { m: TeamMember }) {
+  if (!m.slug && !m.linkedin) return null;
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <DossierLink m={m} />
+      <ProfileLink m={m} />
+    </div>
   );
 }
 
@@ -84,12 +107,18 @@ export default function Team() {
                 <Badge initials={m.initials} photo={m.photo} name={m.name} />
                 <div>
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-acid">Command / Head of Team</span>
-                  <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">{m.name}</h2>
+                  <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">
+                    {m.slug ? (
+                      <Link href={`/team/${m.slug}`} className="transition-colors hover:text-acid">{m.name}</Link>
+                    ) : (
+                      m.name
+                    )}
+                  </h2>
                   <p className="mt-2 font-mono text-sm uppercase tracking-[0.18em] text-steel">{m.title}</p>
                   <p className="mt-4 max-w-2xl text-bone/70">
                     Runs day-to-day operations across every campaign — making sure the right targets get reached and clients see meetings on the calendar.
                   </p>
-                  <ProfileLink m={m} />
+                  <Links m={m} />
                 </div>
               </div>
             </AnimateIn>
@@ -109,9 +138,15 @@ export default function Team() {
               <AnimateIn key={m.name} delay={i * 0.08} className="h-full bg-ink">
                 <div className="h-full bg-ink p-8">
                   <Badge initials={m.initials} photo={m.photo} name={m.name} size="sm" />
-                  <h3 className="mt-5 font-display text-2xl uppercase text-bone">{m.name}</h3>
+                  <h3 className="mt-5 font-display text-2xl uppercase text-bone">
+                    {m.slug ? (
+                      <Link href={`/team/${m.slug}`} className="transition-colors hover:text-acid">{m.name}</Link>
+                    ) : (
+                      m.name
+                    )}
+                  </h3>
                   <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">{m.title}</p>
-                  <ProfileLink m={m} />
+                  <Links m={m} />
                 </div>
               </AnimateIn>
             ))}
