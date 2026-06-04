@@ -238,3 +238,24 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] ChiliPiper real router slug -> site.config.ts (user retrieving) — fixes all booking
 - [ ] Team roster (name/title/LinkedIn) -> src/lib/team.ts
 - [ ] Sanity wiring -> blog archive + post layout
+
+---
+
+# Update — ChiliPiper fix + Team (Bionic) expansion with photos
+
+## Status: SHIPPED
+- [x] ChiliPiper ROOT-CAUSE FIX: was sending default trigger + map:true (needs a form).
+      Now sends trigger:"RouterLink" + lead:{PersonEmail:""}, no map — matches the
+      working snippet. Applied to BookingButton, fireChiliPiper, ChiliPiperInline.
+- [x] Team expanded from abstraktmg.com/leadership-team (Bionic = Sapper key player):
+      Amie Milner (GM, head), Tony Auck (VP Exec Sales), Alexandra Guarino (Dir Partner
+      Success, Bionic), Doug Jennings (Dir Operations, Bionic), Natalie Archer, Jeff Winters.
+      Real headshots in /public/images/team, grayscale ID-badge avatars.
+- [x] No individual LinkedIn URLs on the leadership page -> still need those to add per-person links.
+
+## OPEN — menu/IA (proposed, awaiting confirmation before building)
+- 3-axis model: Solutions × Tactics × Industries. Proposed mega-menu under "Appointment
+  Setting" (Solutions column + Tactics column + HIT Method feature) and a new top-level
+  "Industries" next to Results. Restyle nav/footer to v2 in the same pass. Then footer.
+- HIT Method PDF = the "how we work" process (The Pursuit, 6 stages) -> fold into Process
+  and/or Appointment Setting overview; the 6 stages map 1:1 to the Tactics.
