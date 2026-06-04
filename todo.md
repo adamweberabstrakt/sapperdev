@@ -108,3 +108,23 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Build cold-calling / cold-email / LinkedIn service pages (reuse appointment pattern)
 - [ ] Reskin Navbar/Footer + inner pages to v2
 - [ ] (Later) form fills for soft conversions / list signups
+
+---
+
+# Update — Logo set, Lead Qualification page, language scrub
+
+## Status: SHIPPED to production
+- [x] Add logo set to /public/images (mark, dark, lime, light)
+- [x] Header uses lime logo; footer uses light logo (on navy)
+- [x] New /lead-qualification page in v2 (intercept→identify→score→qualify→route,
+      speed-to-lead band, criteria + dossier, outcomes, FAQ, CTA) — modeled on
+      Leadium's Inbound Lead Qualification page, with intel/precision framing
+- [x] Added Lead Qualification to Services nav dropdown
+- [x] Scrubbed "assault" -> "attack"; softened gun-leaning terms
+      (weapon -> edge, "fires at" -> "locks onto", "fire in" -> "move in",
+      "fires from" -> "follows from"). Code identifier fireChiliPiper left as-is.
+- [x] Clean build (23 pages); pushed to main
+
+## Notes
+- "this page" interpreted as Leadium /services/inbound-lead-qualification (confirm).
+- Footer logo set to light as a sensible default — change if you want lime there too.
