@@ -53,10 +53,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/images/sapper-logo.svg"
-              alt="Sapper Consulting"
-              width={140}
-              height={35}
+              src="/images/sapper-logo-lime.png"
+              alt="Sapper"
+              width={150}
+              height={32}
+              className="h-8 w-auto"
               priority
             />
           </Link>

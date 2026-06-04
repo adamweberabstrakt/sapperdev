@@ -8,7 +8,7 @@ import { CASE_STUDIES } from "@/lib/constants";
 
 export const metadata = {
   description:
-    "Outbound B2B appointment setting built on a verified, intent-scored dream-ICP target list. One coordinated assault — calling, email, and LinkedIn — against your named decision-makers.",
+    "Outbound B2B appointment setting built on a verified, intent-scored dream-ICP target list. One coordinated attack — calling, email, and LinkedIn — against your named decision-makers.",
 };
 
 const LIST_BULLETS = [
@@ -55,7 +55,7 @@ const CHANNELS = [
 const ABM_STEPS = [
   { n: "01", title: "Pick the targets", desc: "You choose the dream accounts. The named list is the mission." },
   { n: "02", title: "Build the HIT list", desc: "We verify emails, identify mobiles, and score real intent." },
-  { n: "03", title: "Coordinated assault", desc: "Calls, email, and LinkedIn fire against the same buyers." },
+  { n: "03", title: "Coordinated attack", desc: "Calls, email, and LinkedIn lock onto the same buyers." },
   { n: "04", title: "Meetings booked", desc: "Decision-makers land on your calendar — and the list is yours." },
 ];
 
@@ -76,7 +76,7 @@ export default function Home() {
             className="mt-8 max-w-5xl font-display text-5xl uppercase leading-[0.92] sm:text-7xl lg:text-8xl animate-fade-up"
             style={{ animationDelay: "0.08s" }}
           >
-            One coordinated assault on the{" "}
+            One coordinated attack on the{" "}
             <span className="text-acid">accounts</span> you&apos;ve always wanted.
           </h1>
 
@@ -86,7 +86,7 @@ export default function Home() {
           >
             Outbound B2B appointment setting built on a dream-ICP target list
             that&apos;s verified, intent-scored, and impossible to copy. The list
-            is the weapon — every channel fires at the same named decision-makers.
+            is the edge — every channel locks onto the same named decision-makers.
           </p>
 
           <div
@@ -173,7 +173,7 @@ export default function Home() {
           </h2>
           <p className="mt-6 max-w-2xl text-bone/70">
             We don&apos;t spray one channel and hope. Calls, email, and LinkedIn
-            fire in coordinated motion against the same named decision-makers — so
+            move in coordinated motion against the same named decision-makers — so
             your brand shows up everywhere they look.
           </p>
         </AnimateIn>
@@ -276,7 +276,7 @@ export default function Home() {
               Ready to hit your <span className="text-acid">dream accounts?</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-bone/70">
-              One coordinated assault. One target list. Every channel pointed at
+              One coordinated attack. One target list. Every channel pointed at
               the decision-makers you actually want.
             </p>
             <div className="mt-10">

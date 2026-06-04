@@ -28,11 +28,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/images/sapper-logo.svg"
-              alt="Sapper Consulting"
-              width={140}
-              height={35}
-              className="mb-4"
+              src="/images/sapper-logo-light.png"
+              alt="Sapper"
+              width={150}
+              height={32}
+              className="mb-4 h-8 w-auto"
             />
             <p className="text-sm text-white/60 leading-relaxed">
               Generating consistent B2B sales meetings through strategic

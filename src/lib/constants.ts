@@ -8,6 +8,7 @@ export const NAV_LINKS = [
       { name: "B2B Cold Calling", href: "/b2b-cold-calling" },
       { name: "Cold Email Marketing", href: "/cold-email-marketing" },
       { name: "B2B LinkedIn Outreach", href: "/b2b-linkedin-outreach" },
+      { name: "Lead Qualification", href: "/lead-qualification" },
     ],
   },
   { name: "Results", href: "/results" },

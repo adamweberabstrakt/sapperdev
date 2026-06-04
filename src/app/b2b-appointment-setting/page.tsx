@@ -45,7 +45,7 @@ const LIST_PIPELINE = [
 const PROCESS = [
   { n: "01", title: "Targeted audience development", desc: "We build a hyper-targeted list from 125M+ records — industry, geography, revenue, and more." },
   { n: "02", title: "Custom, personalized outreach", desc: "AI tooling plus expert copywriting craft messages that cut through the noise." },
-  { n: "03", title: "Multi-channel engagement", desc: "Direct mail, email, phone, and LinkedIn fire in coordinated motion at the same buyers." },
+  { n: "03", title: "Multi-channel engagement", desc: "Direct mail, email, phone, and LinkedIn move in coordinated motion at the same buyers." },
   { n: "04", title: "Real-time reporting", desc: "A 24/7 portal and a weekly video from your account manager keep everything transparent." },
   { n: "05", title: "Qualified meetings booked", desc: "We book and confirm meetings to your calendar — and work free until we hit the promised number." },
 ];
@@ -109,7 +109,7 @@ export default function AppointmentSetting() {
             className="mt-8 max-w-2xl text-lg text-bone/70 sm:text-xl animate-fade-up"
             style={{ animationDelay: "0.16s" }}
           >
-            {"We build a verified, intent-scored target list around your exact ICP, then run coordinated outreach across every channel to put qualified, ready-to-talk meetings on your calendar. The list is the difference — everything else fires from it."}
+            {"We build a verified, intent-scored target list around your exact ICP, then run coordinated outreach across every channel to put qualified, ready-to-talk meetings on your calendar. The list is the difference — everything else follows from it."}
           </p>
           <div className="mt-10 flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "0.24s" }}>
             <BookingButton>Book a strategy call</BookingButton>
