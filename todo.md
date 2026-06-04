@@ -375,3 +375,22 @@ only remaining cause is ChiliPiper-side config:
   relative z-10 container (no transform ancestor). /contact + modal unaffected otherwise.
 - If still not interactive: (1) dismiss the cookie bar (covers bottom strip),
   (2) possible ChiliPiper domain-gating of embeds, (3) fallback = open smart link in new tab.
+
+---
+
+# Update — Navbar v2 restyle + real address (NAP)
+- [x] Navbar restyled to v2 (ink/acid, matches footer). Dropdown mega-menu reworked to
+      dark dossier panel with acid mono labels + bordered feature tile. Active = acid.
+- [x] Navbar CTA "Book a Call" now opens the booking modal (dispatches open-booking),
+      closing the mobile/dropdown menus first. Consistent with site-wide booking.
+- [x] site.config.location: real address 701 N 1st St, Suite 201, St. Louis, MO 63102
+      (+ street/zip/stateAbbr/full/mapsUrl from the Google Maps listing).
+- [x] Footer + contact page show the address, linked to Google Maps (good for local NAP).
+
+## Booking status: WORKING. Calendar interactive (Framer-transform fix). "No available
+   time slots" is a ChiliPiper availability setting (assignee working hours/calendar), not site.
+
+## Still open
+- [ ] Delete orphaned booking files (BookingForm.tsx, ChiliPiperInline.tsx) once confirmed
+- [ ] Rework /b2b-appointment-setting hero to HIT Method PDF
+- [ ] Wire Sanity to blog model; per-person team LinkedIn URLs; revoke PAT when done
