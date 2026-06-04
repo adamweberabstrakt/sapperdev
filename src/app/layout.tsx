@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import ChiliPiperLoader from "@/components/integrations/ChiliPiper";
+import BookingModal from "@/components/booking/BookingModal";
 import Chatbot from "@/components/integrations/Chatbot";
 import BehaviorTracking from "@/components/integrations/BehaviorTracking";
 import { siteConfig } from "@/config/site.config";
@@ -81,6 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         {/* Integrations */}
         <ChiliPiperLoader />
+        <BookingModal />
         <Chatbot />
         <BehaviorTracking />
       </body>

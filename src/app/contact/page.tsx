@@ -1,6 +1,6 @@
 import AnimateIn from "@/components/ui/AnimateIn";
 import TargetRadar from "@/components/contact/TargetRadar";
-import ChiliPiperInline from "@/components/contact/ChiliPiperInline";
+import BookingForm from "@/components/booking/BookingForm";
 import { siteConfig } from "@/config/site.config";
 
 export const metadata = {
@@ -72,7 +72,7 @@ export default function Contact() {
                 Lock a <span className="text-acid">time.</span>
               </h2>
               <div className="mt-6">
-                <ChiliPiperInline />
+                <BookingForm />
               </div>
             </AnimateIn>
           </div>
