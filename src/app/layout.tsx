@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import ChiliPiperLoader from "@/components/integrations/ChiliPiper";
 import Chatbot from "@/components/integrations/Chatbot";
+import BehaviorTracking from "@/components/integrations/BehaviorTracking";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -80,6 +81,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Integrations */}
         <ChiliPiperLoader />
         <Chatbot />
+        <BehaviorTracking />
       </body>
     </html>
   );

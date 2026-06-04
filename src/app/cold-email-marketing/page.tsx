@@ -1,7 +1,124 @@
-export default function EmailMarketing() {
+import Section from "@/components/ui/Section";
+import AnimateIn from "@/components/ui/AnimateIn";
+import BookingButton from "@/components/ui/BookingButton";
+
+export const metadata = {
+  title: "Cold Email Marketing",
+  description:
+    "Deliverability-first B2B cold email to a verified ICP list. Personalized, spam-free outreach built on proper email infrastructure — coordinated with calling and LinkedIn to book meetings.",
+};
+
+const PROCESS = [
+  { n: "01", title: "Verified list", desc: "A target list cut to your ICP, with verified addresses so messages reach real inboxes." },
+  { n: "02", title: "Personalized copy", desc: "AI tooling plus expert copywriting craft relevant messages, not templated spam." },
+  { n: "03", title: "Deliverability infrastructure", desc: "Dedicated domains, authentication, and warmup so you land in the inbox, not the spam folder." },
+  { n: "04", title: "Send, measure, iterate", desc: "We track opens, replies, and meetings, then tune the messaging for more conversion." },
+];
+
+const BENEFITS = [
+  "Inbox, not spam — built on proper deliverability infrastructure.",
+  "Personalized at scale, cut to your ICP.",
+  "Protects your primary domain reputation.",
+  "Fast air cover that keeps the phone warm.",
+];
+
+const FAQS = [
+  { q: "How do you stay out of spam?", a: "Verified data, dedicated sending domains, authentication, gradual warmup, and genuinely relevant copy — the things that keep messages landing in the inbox." },
+  { q: "Will this hurt our main domain?", a: "No. We send from dedicated domains so your primary domain reputation stays protected." },
+  { q: "How personalized is it?", a: "Messages are tailored to the prospect and their context — relevant enough to earn a reply, not a generic blast." },
+];
+
+export default function ColdEmail() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-navy">Cold Email Marketing</h1>
-    </main>
+    <>
+      <section className="relative overflow-hidden bg-ink text-bone">
+        <div className="absolute inset-0 bg-tactical-grid" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/0 via-ink/30 to-ink" aria-hidden />
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel animate-fade-up">
+            Engagement Channel / Cold Email
+          </p>
+          <h1 className="mt-8 max-w-4xl font-display text-5xl uppercase leading-[0.92] sm:text-6xl lg:text-7xl animate-fade-up" style={{ animationDelay: "0.08s" }}>
+            Cold email that lands in the <span className="text-acid">inbox.</span>
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg text-bone/70 sm:text-xl animate-fade-up" style={{ animationDelay: "0.16s" }}>
+            {"Spam-free, personalized email to a verified ICP list, built on real deliverability infrastructure so your message actually arrives — and earns replies."}
+          </p>
+          <div className="mt-10 animate-fade-up" style={{ animationDelay: "0.24s" }}>
+            <BookingButton>Book a strategy call</BookingButton>
+          </div>
+        </div>
+      </section>
+
+      <Section bg="ink">
+        <AnimateIn>
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">The Operation / How It Works</p>
+          <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">Built for <span className="text-acid">deliverability.</span></h2>
+        </AnimateIn>
+        <div className="mt-12 grid gap-px border border-steel/20 bg-steel/20 sm:grid-cols-2 lg:grid-cols-4">
+          {PROCESS.map((p, i) => (
+            <AnimateIn key={p.n} delay={i * 0.08} className="h-full bg-ink">
+              <div className="h-full bg-ink p-7">
+                <span className="font-display text-4xl text-acid/30">{p.n}</span>
+                <h3 className="mt-3 font-display text-lg uppercase text-bone">{p.title}</h3>
+                <p className="mt-2 text-sm text-bone/65">{p.desc}</p>
+              </div>
+            </AnimateIn>
+          ))}
+        </div>
+      </Section>
+
+      <section className="bg-panel text-bone">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <AnimateIn>
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Why It Works</p>
+            <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">Relevant. <span className="text-acid">Not spray-and-pray.</span></h2>
+          </AnimateIn>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {BENEFITS.map((b, i) => (
+              <AnimateIn key={b} delay={i * 0.07}>
+                <div className="flex h-full items-start gap-4 border-t-2 border-acid bg-ink p-6 ring-1 ring-steel/15">
+                  <span className="font-mono text-acid">✓</span>
+                  <span className="text-bone/85">{b}</span>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Section bg="ink">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <AnimateIn>
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Intel / FAQ</p>
+            <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">Questions, <span className="text-acid">answered.</span></h2>
+          </AnimateIn>
+          <AnimateIn delay={0.1}>
+            <div>
+              {FAQS.map((f) => (
+                <details key={f.q} className="group border-t border-steel/20 py-5 last:border-b">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                    <span className="font-display text-xl uppercase text-bone">{f.q}</span>
+                    <span className="font-mono text-2xl leading-none text-acid transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-4 text-bone/70">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </AnimateIn>
+        </div>
+      </Section>
+
+      <section className="relative overflow-hidden border-t border-steel/20 bg-ink text-bone">
+        <div className="absolute inset-0 bg-tactical-grid opacity-50" aria-hidden />
+        <div className="relative mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
+          <AnimateIn>
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Prepared for Exec Review</p>
+            <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] text-bone sm:text-6xl">Get your message <span className="text-acid">in front of buyers.</span></h2>
+            <div className="mt-10"><BookingButton>Book a strategy call</BookingButton></div>
+          </AnimateIn>
+        </div>
+      </section>
+    </>
   );
 }

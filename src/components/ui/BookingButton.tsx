@@ -26,6 +26,9 @@ export default function BookingButton({
   const handleBook = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const win = window as Record<string, any>;
+    // Soft-conversion: user opened the booking flow.
+    win.dataLayer = win.dataLayer || [];
+    win.dataLayer.push({ event: "booking_started" });
     try {
       if (win.ChiliPiper?.submit) {
         win.ChiliPiper.submit(
