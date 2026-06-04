@@ -411,3 +411,13 @@ only remaining cause is ChiliPiper-side config:
 - /api/contact/route.ts (Resend) is now orphaned (no form posts to it) -> remove or add a contact form (+RESEND_API_KEY env).
 - concierge.js loader still mounted but unused by the iframe booking -> optional removal (~150KB).
 - ChiliPiper: set assignee availability so slots show. Per-person team LinkedIn URLs. Wire Sanity for blog. Revoke GitHub PAT.
+
+---
+
+# Update — SEO bundle + privacy policy ported
+- [x] SEO: sitemap.ts, robots.ts, opengraph-image + twitter-image (next/og), app icon +
+      apple-icon, not-found (404), JsonLd (ProfessionalService + NAP), metadataBase. Live: sitemap 38 urls.
+- [x] Privacy Policy ported from sapperconsulting.com/privacy-policy (v2-styled, config-driven).
+      PRIVACY_EMAIL is a placeholder (live site obfuscates it) -> CONFIRM/REPLACE.
+- [ ] Terms of Use: live sapperconsulting.com has NO terms page (site: search empty; footer only
+      links Privacy + Sitemap). Options: draft a standard TOS for legal review, or leave placeholder.
