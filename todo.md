@@ -259,3 +259,23 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
   "Industries" next to Results. Restyle nav/footer to v2 in the same pass. Then footer.
 - HIT Method PDF = the "how we work" process (The Pursuit, 6 stages) -> fold into Process
   and/or Appointment Setting overview; the 6 stages map 1:1 to the Tactics.
+
+---
+
+# Update — 3-axis menu IA (built)
+
+## Status: SHIPPED (30 routes)
+- [x] NAV restructured to Solutions × Tactics × Industries
+- [x] "Appointment Setting" desktop mega-menu: Solutions column (Appt Setting, ABM,
+      Demand Gen, Lead Qualification) + Tactics column (Calling, Cold Email, LinkedIn,
+      Direct Mail, Data Enrichment) + "The HIT Method" feature tile -> /process
+- [x] New top-level "Industries" + /industries landing (24 verticals, v2)
+- [x] Standalone "Process" top-level folded into the mega-menu feature (page still at /process)
+- [x] Mobile menu shows grouped sections; clean build, pushed
+
+## Next candidates
+- [ ] Restyle Navbar + Footer to v2 (ink/acid) — they're still legacy navy/cyan — then the footer work
+- [ ] Align /b2b-appointment-setting hero to the HIT Method / "The Pursuit" PDF framing
+- [ ] Individual industry pages (later, likely programmatic: solution × industry)
+- [ ] Per-person LinkedIn URLs for team (leadership page exposes none)
+- [ ] Verify ChiliPiper buttons now open (trigger fix shipped)
