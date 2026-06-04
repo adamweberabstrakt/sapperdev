@@ -35,6 +35,8 @@ export default function BookingButton({
           SITE_CONFIG.chilipiper.domain,
           SITE_CONFIG.chilipiper.router,
           {
+            trigger: "RouterLink",
+            lead: { PersonEmail: "" },
             onSuccess: () => {
               win.dataLayer = win.dataLayer || [];
               win.dataLayer.push({ event: "meeting_booked" });

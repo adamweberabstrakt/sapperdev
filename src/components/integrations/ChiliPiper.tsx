@@ -27,7 +27,7 @@ export function fireChiliPiper(formData: {
   const win = window as Record<string, any>;
   if (typeof window !== "undefined" && win.ChiliPiper) {
     win.ChiliPiper.submit(chilipiperDomain, chilipiperRouter, {
-      map: true,
+      trigger: "RouterLink",
       lead: {
         FirstName: formData.name.split(" ")[0],
         LastName: formData.name.split(" ").slice(1).join(" ") || "",

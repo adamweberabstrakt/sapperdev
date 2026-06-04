@@ -1,3 +1,4 @@
+import Image from "next/image";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
 import { TEAM, type TeamMember } from "@/lib/team";
@@ -9,16 +10,20 @@ export const metadata = {
     "The operators behind the meetings. A U.S.-based team of 400+ in St. Louis, led day to day by General Manager Amie Milner.",
 };
 
-function Badge({ initials, size = "lg" }: { initials: string; size?: "lg" | "sm" }) {
+function Badge({ initials, photo, name, size = "lg" }: { initials: string; photo?: string; name?: string; size?: "lg" | "sm" }) {
   const box = size === "lg" ? "h-24 w-24" : "h-16 w-16";
   const text = size === "lg" ? "text-3xl" : "text-xl";
   return (
-    <div className={`relative flex ${box} items-center justify-center bg-ink ring-1 ring-steel/30`}>
-      <span className="absolute left-0 top-0 h-2.5 w-2.5 border-l border-t border-acid" />
-      <span className="absolute right-0 top-0 h-2.5 w-2.5 border-r border-t border-acid" />
-      <span className="absolute bottom-0 left-0 h-2.5 w-2.5 border-b border-l border-acid" />
-      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 border-b border-r border-acid" />
-      <span className={`font-display ${text} text-acid`}>{initials}</span>
+    <div className={`relative flex ${box} items-center justify-center overflow-hidden bg-ink ring-1 ring-steel/30`}>
+      <span className="absolute left-0 top-0 z-10 h-2.5 w-2.5 border-l border-t border-acid" />
+      <span className="absolute right-0 top-0 z-10 h-2.5 w-2.5 border-r border-t border-acid" />
+      <span className="absolute bottom-0 left-0 z-10 h-2.5 w-2.5 border-b border-l border-acid" />
+      <span className="absolute bottom-0 right-0 z-10 h-2.5 w-2.5 border-b border-r border-acid" />
+      {photo ? (
+        <Image src={photo} alt={name ?? ""} fill sizes="96px" className="object-cover grayscale" />
+      ) : (
+        <span className={`font-display ${text} text-acid`}>{initials}</span>
+      )}
     </div>
   );
 }
@@ -76,7 +81,7 @@ export default function Team() {
           {featured.map((m) => (
             <AnimateIn key={m.name}>
               <div className="flex flex-col items-start gap-8 border-t-2 border-acid bg-ink p-8 sm:flex-row sm:items-center sm:p-10">
-                <Badge initials={m.initials} />
+                <Badge initials={m.initials} photo={m.photo} name={m.name} />
                 <div>
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-acid">Command / Head of Team</span>
                   <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">{m.name}</h2>
@@ -103,7 +108,7 @@ export default function Team() {
             {rest.map((m, i) => (
               <AnimateIn key={m.name} delay={i * 0.08} className="h-full bg-ink">
                 <div className="h-full bg-ink p-8">
-                  <Badge initials={m.initials} size="sm" />
+                  <Badge initials={m.initials} photo={m.photo} name={m.name} size="sm" />
                   <h3 className="mt-5 font-display text-2xl uppercase text-bone">{m.name}</h3>
                   <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-steel">{m.title}</p>
                   <ProfileLink m={m} />
