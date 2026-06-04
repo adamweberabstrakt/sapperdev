@@ -437,3 +437,19 @@ only remaining cause is ChiliPiper-side config:
 - [ ] Wire Sanity to blog model + real posts/cover images; per-person team LinkedIn URLs.
 - [ ] Decide on orphaned /api/contact (Resend) route; GTM->GA4 conversion config; a11y pass.
 - [ ] Optional: drop unused concierge.js loader. Revoke GitHub PAT at handoff.
+
+---
+
+# Update — Sanity wired (env-gated) + team LinkedIn URLs
+- [x] src/sanity/{config,fetch,blog}.ts: read-only GROQ fetch (no SDK dep), portable-text
+      -> Block[] mapper, cover image. Active when NEXT_PUBLIC_SANITY_PROJECT_ID is set.
+- [x] blog.ts helpers async (Sanity-or-static fallback). Blog pages + sitemap async. PostCard +
+      post hero render coverImage when present. Build green (static fallback, 48 routes).
+- [x] sanity-studio/README.md (post/callout/table schemas matching the mapper) + .env.example.
+- [x] Team LinkedIn added (verified): Jeff Winters, Amie Milner, Tony Auck, Doug Jennings, Natalie Archer.
+      Alexandra Guarino LEFT BLANK — no confidently-verified profile (search hit a different person).
+
+## To go fully live on Sanity (their side)
+- Create Sanity project, add schemas from sanity-studio/README.md, set env vars in Vercel,
+  add CORS origin, publish posts. Site switches automatically (60s ISR).
+- Optional: confirm Alexandra Guarino's LinkedIn URL to fill the last team profile.
