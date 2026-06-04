@@ -327,3 +327,25 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Confirm ChiliPiper buttons open (empty-lead + onError redirect removed)
 - [ ] Restyle Navbar to v2; align /b2b-appointment-setting to HIT Method PDF
 - [ ] Real cover images for posts (when Sanity is wired)
+
+---
+
+# Update — ChiliPiper switched to deploy(formType: HTML) form-trigger
+
+## Status: SHIPPED — needs a live test
+- [x] BookingForm: real HTML form (firstname/lastname/email/company). On mount it
+      calls ChiliPiper.deploy("abstraktmg","sapper_router_1",{formType:"HTML"}) so the
+      router intercepts the form submit and opens the calendar. onSuccess -> meeting_booked.
+- [x] BookingModal: mounted once in layout; opens on "open-booking" window event.
+- [x] BookingButton: now opens the modal (dispatches "open-booking") instead of submit().
+- [x] /contact: inline BookingForm (replaces old inline embed). Radar console kept.
+- This matches the exact deploy(formType HTML) snippet ChiliPiper provided.
+
+## If it STILL doesn't open after this
+The code now does exactly what the router expects (real form + deploy intercept), so the
+only remaining cause is ChiliPiper-side config:
+  - Add sapperdev.vercel.app (and the production domain) to the Concierge ALLOWED DOMAINS.
+  - Confirm router "sapper_router_1" is published/active.
+  - Confirm the form's email field name maps (currently name="email").
+
+## Old/orphaned (left valid, unused): ChiliPiperInline.tsx
