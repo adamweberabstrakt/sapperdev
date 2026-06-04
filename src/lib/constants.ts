@@ -42,6 +42,7 @@ export const NAV_LINKS: NavItem[] = [
     },
   },
   { name: "Industries", href: "/industries" },
+  { name: "Blog", href: "/blog" },
   { name: "Results", href: "/results" },
   { name: "About", href: "/about" },
   { name: "Team", href: "/team" },

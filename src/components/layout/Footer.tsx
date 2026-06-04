@@ -28,6 +28,7 @@ const COLUMNS = [
     links: [
       { name: "The HIT Method", href: "/process" },
       { name: "Industries", href: "/industries" },
+      { name: "Blog", href: "/blog" },
       { name: "Results", href: "/results" },
       { name: "About", href: "/about" },
       { name: "Team", href: "/team" },
