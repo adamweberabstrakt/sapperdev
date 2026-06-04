@@ -394,3 +394,20 @@ only remaining cause is ChiliPiper-side config:
 - [ ] Delete orphaned booking files (BookingForm.tsx, ChiliPiperInline.tsx) once confirmed
 - [ ] Rework /b2b-appointment-setting hero to HIT Method PDF
 - [ ] Wire Sanity to blog model; per-person team LinkedIn URLs; revoke PAT when done
+
+---
+
+# REVIEW — Cleanup pass (orphan removal)
+- Deleted: BookingForm.tsx, ChiliPiperInline.tsx, ContactForm.tsx (unused after smart-link iframe).
+- Removed dead fireChiliPiper helper; ChiliPiper.tsx is loader-only.
+- Orphan scan now clean. Build green (43 routes).
+
+# PRODUCTION-READINESS GAPS (found in recon)
+- SEO/infra MISSING: sitemap.ts, robots.ts, app icon, opengraph-image, custom not-found (404).
+- layout metadata: has title/description/openGraph; VERIFY metadataBase is set (else OG/canonical are relative).
+- No JSON-LD schema anywhere -> add Organization + LocalBusiness (NAP now available).
+- siteConfig.url still sapperdev.vercel.app -> needs production domain.
+- Legal pages privacy-policy / terms-of-use are 7-line placeholders -> need real content.
+- /api/contact/route.ts (Resend) is now orphaned (no form posts to it) -> remove or add a contact form (+RESEND_API_KEY env).
+- concierge.js loader still mounted but unused by the iframe booking -> optional removal (~150KB).
+- ChiliPiper: set assignee availability so slots show. Per-person team LinkedIn URLs. Wire Sanity for blog. Revoke GitHub PAT.
