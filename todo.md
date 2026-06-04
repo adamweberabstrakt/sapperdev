@@ -302,3 +302,28 @@ child pages, embed video (youtu.be/GMiD_HGFi94), and route all primary CTAs to C
 - [ ] Restyle Navbar to v2 (footer now done; navbar still legacy navy/cyan)
 - [ ] Align /b2b-appointment-setting hero to the HIT Method PDF
 - [ ] Per-person team LinkedIn URLs
+
+---
+
+# Update — Blog architecture (static, Sanity-ready)
+
+## Status: SHIPPED for team review (43 routes)
+- [x] src/lib/blog.ts — typed model: CATEGORIES (research/success/news/pr), BlogPost,
+      Block union (h2/h3/p/ul/callout/table), POSTS (1 real seed + 7 placeholders),
+      helpers getAllPosts/getPost/getPostsByCategory/getFeatured/getCategory.
+- [x] /blog archive — featured post + category tab nav + grid (Salesforce-news style)
+- [x] /blog/category/[category] — Research / Success / News / PR bucket pages
+- [x] /blog/[slug] — single layout: block renderer, related posts, CTA
+- [x] Seed post: Jeff Winters manufacturing lead-gen guide (tables render)
+- [x] PostCard / CategoryNav / PostBody components; Blog in nav + footer
+- [x] Card/post media = styled tactical placeholders (no image assets needed yet)
+
+## Sanity swap plan (when ready)
+- post document: title, slug, excerpt, category(enum), author, date, readTime, featured, body(portable text)
+- Replace the helper bodies in blog.ts with GROQ queries -> pages unchanged.
+- Portable-text serializers map 1:1 to the Block types already rendered.
+
+## Still open
+- [ ] Confirm ChiliPiper buttons open (empty-lead + onError redirect removed)
+- [ ] Restyle Navbar to v2; align /b2b-appointment-setting to HIT Method PDF
+- [ ] Real cover images for posts (when Sanity is wired)
