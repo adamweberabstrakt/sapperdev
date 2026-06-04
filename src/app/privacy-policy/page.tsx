@@ -7,8 +7,7 @@ export const metadata = {
     "How Sapper Consulting collects, uses, and discloses your information when you use our website.",
 };
 
-// NOTE: the live site obfuscates the privacy contact email — confirm/replace this.
-const PRIVACY_EMAIL = "privacy@sapperconsulting.com";
+const PRIVACY_EMAIL = "info@sapperconsulting.com";
 
 const SECTIONS: { title: string; paras?: string[]; list?: string[] }[] = [
   {
