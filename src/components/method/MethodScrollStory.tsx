@@ -54,7 +54,7 @@ const BEATS: Beat[] = [
   { step: "03 / Data Quality", title: "Cut everything that isn't real.", line: "Then we verify and filter. Bad data and bad-fit accounts are removed. Only real, reachable decision-makers survive.", win: [0.26, 0.4] },
   { step: "04 / Coordinated Motion", title: "Every channel. One list.", line: "Direct mail, LinkedIn, calls, and email pulse against the same verified decision-makers — one coordinated motion, not single-channel spray.", win: [0.4, 0.56] },
   { step: "05 / Always-On Recon", title: "The list feeds itself.", line: "Form fills, meeting bookings, site visits, and social signals reveal company intent. We research the buying committee and feed the right new decision-makers back into the list.", win: [0.56, 0.78] },
-  { step: "06 / The Pursuit", title: "A pipeline on a loop.", line: "Outbound motion and always-on recon run at once — a self-feeding pipeline that compounds, so qualified meetings keep landing on your calendar.", win: [0.78, 1.0], cta: true },
+  { step: "06 / The Method", title: "A pipeline on a loop.", line: "Outbound motion and always-on research run at once — a self-feeding pipeline that compounds, so qualified meetings keep landing on your calendar.", win: [0.78, 1.0], cta: true },
 ];
 
 /* --------------------------------------------------- brand-specific icons */
@@ -261,8 +261,8 @@ export default function MethodScrollStory({
 } = {}) {
   return (
     <ScrollStory
-      label="Operation / The Pursuit"
-      srHeading="How Sapper builds your pipeline"
+      label="Operation / The Method"
+      srHeading="How Northbound builds your pipeline"
       beats={BEATS}
       scene={scene}
       staticScene={staticScene}

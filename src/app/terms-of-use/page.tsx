@@ -4,12 +4,12 @@ import { siteConfig } from "@/config/site.config";
 export const metadata = {
   title: "Terms of Use",
   description:
-    "The terms governing your access to and use of the Sapper Consulting website.",
+    "The terms governing your access to and use of the Northbound website.",
 };
 
 // DRAFT: standard website Terms of Use template. Have legal counsel review and
 // adjust before relying on this for production.
-const CONTACT_EMAIL = "info@sapperconsulting.com";
+const CONTACT_EMAIL = "info@example.com";
 
 const SECTIONS: { title: string; paras?: string[]; list?: string[] }[] = [
   {

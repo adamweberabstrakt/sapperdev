@@ -282,7 +282,7 @@ export default function DemandGenScrollStory() {
   return (
     <ScrollStory
       label="Operation / Demand Engine"
-      srHeading="How Sapper's demand generation engine works"
+      srHeading="How Northbound's demand generation engine works"
       beats={BEATS}
       scene={scene}
       staticScene={staticScene}

@@ -4,10 +4,10 @@ import { siteConfig } from "@/config/site.config";
 export const metadata = {
   title: "Privacy Policy",
   description:
-    "How Sapper Consulting collects, uses, and discloses your information when you use our website.",
+    "How Northbound collects, uses, and discloses your information when you use our website.",
 };
 
-const PRIVACY_EMAIL = "info@sapperconsulting.com";
+const PRIVACY_EMAIL = "info@example.com";
 
 const SECTIONS: { title: string; paras?: string[]; list?: string[] }[] = [
   {

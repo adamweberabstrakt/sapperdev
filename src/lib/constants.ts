@@ -36,7 +36,7 @@ export const NAV_LINKS: NavItem[] = [
       },
     ],
     feature: {
-      label: "The HIT Method",
+      label: "Our Method",
       desc: "How the pursuit works — six stages, one target list.",
       href: "/process",
     },
@@ -51,31 +51,27 @@ export const NAV_LINKS: NavItem[] = [
 
 export const TEAM_MEMBERS = [
   {
-    name: "Jeff Winters",
-    title: "Founder",
-    photo: "/images/team/jeff-winters.webp",
-    bio: "Jeff founded Sapper Consulting with a mission to solve the biggest challenge in B2B sales — consistent pipeline generation.",
-  },
-  {
-    name: "Amie Milner",
-    title: "General Manager",
-    photo: "/images/team/amie-milner.webp",
-    bio: "Amie oversees daily operations and ensures our clients see measurable results from every campaign.",
-  },
-  {
-    name: "Tony Auck",
-    title: "Director of Executive Sales",
-    photo: "/images/team/tony-auck.webp",
-    bio: "Tony leads our executive sales strategy, connecting with decision-makers across complex B2B sectors.",
-  },
-  {
-    name: "Natalie Archer",
-    title: "Senior Sales Representative",
+    name: "Team Member One",
+    title: "Chief Executive Officer",
     photo: null,
-    initials: "NA",
-    bio: "Natalie drives client success through strategic outreach and relationship building.",
+    initials: "T1",
+    bio: "Short placeholder bio. Replace with this team member's background and focus.",
   },
-];
+  {
+    name: "Team Member Two",
+    title: "VP of Sales",
+    photo: null,
+    initials: "T2",
+    bio: "Short placeholder bio. Replace with this team member's background and focus.",
+  },
+  {
+    name: "Team Member Three",
+    title: "Director of Operations",
+    photo: null,
+    initials: "T3",
+    bio: "Short placeholder bio. Replace with this team member's background and focus.",
+  },
+]
 
 export const CASE_STUDIES = [
   {

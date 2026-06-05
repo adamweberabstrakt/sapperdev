@@ -7,13 +7,13 @@ import CaseFileTabs, { type CaseTab } from "@/components/results/CaseFileTabs";
 export const metadata = {
   title: "TeamLogic IT Case Study — 70% of Annual Sales",
   description:
-    "How a managed IT franchise with no sales background used Sapper to generate 70% of its annual sales and land its two highest-paying clients.",
+    "How a managed IT franchise with no sales background used Northbound to generate 70% of its annual sales and land its two highest-paying clients.",
 };
 
 const TAGS = ["Managed IT Services", "Portland, Oregon", "70+ Locations"];
 
 const HIGHLIGHTS = [
-  { num: "70%", label: "of annual sales from Sapper leads" },
+  { num: "70%", label: "of annual sales from Northbound leads" },
   { num: "2", label: "highest-paying clients landed" },
   { num: "1", label: "dedicated point person" },
 ];
@@ -24,27 +24,27 @@ const TABS: CaseTab[] = [
     label: "The Challenge",
     body: [
       "TeamLogic IT is a managed services provider with 70+ U.S. locations — cloud, data backup, cybersecurity, and VOIP. Owner Dan Thomas is an IT expert, not a salesperson.",
-      "When Dan opened his franchise, prospecting meant going door to door so people could see his face. It worked, but it was costly, slow, and impossible to scale. He came to Sapper skeptical that email could do any better.",
+      "When Dan opened his franchise, prospecting meant going door to door so people could see his face. It worked, but it was costly, slow, and impossible to scale. He came to Northbound skeptical that email could do any better.",
     ],
     quote: "Walking an office park has very little return. Email marketing is a lot more effective.",
   },
   {
     id: "why",
-    label: "Why Sapper",
+    label: "Why Northbound",
     body: [
-      "Sapper became Dan's outsourced lead generation team — building a customized, data-driven outreach engine that put meetings with qualified prospects straight in his inbox.",
+      "Northbound became Dan's outsourced lead generation team — building a customized, data-driven outreach engine that put meetings with qualified prospects straight in his inbox.",
       "Instead of hiring full-time staff he didn't need, Dan paid for exactly the expertise he did: a pipeline that runs like a well-oiled machine.",
     ],
-    quote: "There's no way I could hire an employee for that. I invest in Sapper instead.",
+    quote: "There's no way I could hire an employee for that. I invest in Northbound instead.",
   },
   {
     id: "experience",
     label: "The Experience",
     body: [
       "Dan got one dedicated point person who knew him, his business, and his prospects — managing every campaign and acting as the voice of his company.",
-      "That continuity built trust. Sapper's outreach landed him larger clients in his target market, including his two highest-paying accounts.",
+      "That continuity built trust. Northbound's outreach landed him larger clients in his target market, including his two highest-paying accounts.",
     ],
-    quote: "I couldn't have grown my business to where it is without Sapper.",
+    quote: "I couldn't have grown my business to where it is without Northbound.",
   },
 ];
 
@@ -65,10 +65,10 @@ export default function TeamLogicCaseStudy() {
                 Case File / TeamLogic IT
               </p>
               <h1 className="mt-6 font-display text-4xl uppercase leading-[0.95] sm:text-5xl lg:text-6xl">
-                70% of annual sales, <span className="text-acid">from Sapper leads.</span>
+                70% of annual sales, <span className="text-acid">from Northbound leads.</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg text-bone/70">
-                An IT expert with no sales background opened a franchise — and Sapper&apos;s prospecting became the engine behind the majority of its revenue.
+                An IT expert with no sales background opened a franchise — and Northbound&apos;s prospecting became the engine behind the majority of its revenue.
               </p>
               <div className="mt-7 flex flex-wrap gap-2">
                 {TAGS.map((t) => (
@@ -80,7 +80,7 @@ export default function TeamLogicCaseStudy() {
             </AnimateIn>
             <AnimateIn delay={0.12}>
               <div className="border-t-2 border-acid bg-panel p-8 ring-1 ring-steel/20">
-                <CountUpGauge value={70} suffix="%" label="of annual sales attributed to Sapper" />
+                <CountUpGauge value={70} suffix="%" label="of annual sales attributed to Northbound" />
               </div>
             </AnimateIn>
           </div>
@@ -120,7 +120,7 @@ export default function TeamLogicCaseStudy() {
           <AnimateIn>
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Your Operation Next</p>
             <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] text-bone sm:text-6xl">
-              Put Sapper on <span className="text-acid">your pipeline.</span>
+              Put Northbound on <span className="text-acid">your pipeline.</span>
             </h2>
             <div className="mt-10"><BookingButton>Book a strategy call</BookingButton></div>
           </AnimateIn>

@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site.config";
 export const metadata = {
   title: "About",
   description:
-    "Since day one, Sapper has redefined B2B prospecting — connecting businesses with their ideal buyers. A 400+ person, U.S.-based team in St. Louis booking 100,000+ meetings a year.",
+    "Since day one, Northbound has redefined B2B prospecting — connecting businesses with their ideal buyers. A 400+ person, U.S.-based team in St. Louis booking 100,000+ meetings a year.",
 };
 
 const VALUES = [
@@ -19,7 +19,7 @@ const VALUES = [
 
 const TIMELINE = [
   { year: "Day One", text: "Founded to fix the hardest problem in B2B sales: consistent, predictable pipeline." },
-  { year: "2021", text: "As spam filters tightened and inboxes crowded, Sapper joined forces with Abstrakt — adding scale, technology, and a true multi-channel motion." },
+  { year: "2021", text: "As spam filters tightened and inboxes crowded, Northbound joined forces with Northbound — adding scale, technology, and a true multi-channel motion." },
   { year: "Today", text: "2,000+ clients across 80+ industries in all 50 states, booked by a 400+ person, U.S.-based team in St. Louis." },
 ];
 
@@ -38,13 +38,13 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/0 via-ink/30 to-ink" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel animate-fade-up">
-            Field Manual / About Sapper
+            Field Manual / About Northbound
           </p>
           <h1 className="mt-8 max-w-4xl font-display text-5xl uppercase leading-[0.92] sm:text-6xl lg:text-7xl animate-fade-up" style={{ animationDelay: "0.08s" }}>
             Revolutionizing the way you <span className="text-acid">connect.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-bone/70 sm:text-xl animate-fade-up" style={{ animationDelay: "0.16s" }}>
-            {"Since day one, Sapper has redefined B2B prospecting — connecting businesses with their ideal buyers and booking thousands of real meetings. We do not just adapt to a harder outbound landscape. We out-target it."}
+            {"Since day one, Northbound has redefined B2B prospecting — connecting businesses with their ideal buyers and booking thousands of real meetings. We do not just adapt to a harder outbound landscape. We out-target it."}
           </p>
           <div className="mt-10 animate-fade-up" style={{ animationDelay: "0.24s" }}>
             <BookingButton>Book a strategy call</BookingButton>
@@ -115,7 +115,7 @@ export default function About() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <AnimateIn>
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Why Sapper</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">Why Northbound</p>
               <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">Proven. <span className="text-acid">At scale.</span></h2>
               <ul className="mt-8 space-y-5">
                 {WHY.map((w) => (

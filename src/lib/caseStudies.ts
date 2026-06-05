@@ -10,7 +10,7 @@ export interface CaseStudy {
   result: string;
 }
 
-// Detailed, public-facing case studies (sourced from Sapper client results).
+// Detailed, public-facing case studies (sourced from Northbound client results).
 // Kept separate from constants.CASE_STUDIES so existing pages are untouched.
 export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   {

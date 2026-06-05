@@ -5,7 +5,7 @@ import { SITE_STATS } from "@/lib/constants";
 export const metadata = {
   title: "Industries",
   description:
-    "Sapper books meetings across 80+ industries. The HIT method — a verified, intent-scored dream-ICP list worked by every channel — adapts to the buyers and decision-makers in your vertical.",
+    "Northbound books meetings across 80+ industries. The HIT method — a verified, intent-scored dream-ICP list worked by every channel — adapts to the buyers and decision-makers in your vertical.",
 };
 
 const INDUSTRIES = [

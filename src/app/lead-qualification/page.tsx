@@ -7,7 +7,7 @@ import DossierCard from "@/components/home/DossierCard";
 export const metadata = {
   title: "Lead Qualification",
   description:
-    "Speed-to-lead qualification with military precision. Sapper intercepts, identifies, scores, and qualifies every inbound lead against your ICP — so only confirmed, sales-ready targets reach your closers.",
+    "Speed-to-lead qualification with military precision. Northbound intercepts, identifies, scores, and qualifies every inbound lead against your ICP — so only confirmed, sales-ready targets reach your closers.",
 };
 
 const PROOF = SITE_STATS;

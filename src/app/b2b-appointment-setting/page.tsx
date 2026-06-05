@@ -9,7 +9,7 @@ import DossierCard from "@/components/home/DossierCard";
 export const metadata = {
   title: "B2B Appointment Setting",
   description:
-    "B2B appointment setting built on verified, intent-scored target lists. Sapper books qualified, ICP-fit meetings to your calendar through coordinated calling, email, LinkedIn, and direct mail.",
+    "B2B appointment setting built on verified, intent-scored target lists. Northbound books qualified, ICP-fit meetings to your calendar through coordinated calling, email, LinkedIn, and direct mail.",
 };
 
 const PROOF = SITE_STATS;

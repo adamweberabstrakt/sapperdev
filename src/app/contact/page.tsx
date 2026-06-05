@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site.config";
 export const metadata = {
   title: "Contact",
   description:
-    "Book a strategy call with Sapper. A U.S.-based team of 400+ in St. Louis, ready to lock onto your pipeline. Pick a time on the calendar — no forms, no phone tag.",
+    "Book a strategy call with Northbound. A U.S.-based team of 400+ in St. Louis, ready to lock onto your pipeline. Pick a time on the calendar — no forms, no phone tag.",
 };
 
 const INTEL = [

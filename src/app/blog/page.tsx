@@ -7,7 +7,7 @@ import { getAllPosts, getFeatured, categoryLabel, fmtDate } from "@/lib/blog";
 export const metadata = {
   title: "Blog",
   description:
-    "Field notes on B2B outbound — research, client success, news, and press from Sapper Consulting.",
+    "Field notes on B2B outbound — research, client success, news, and press from Northbound.",
 };
 
 export default async function Blog() {

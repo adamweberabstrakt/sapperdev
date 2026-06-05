@@ -601,3 +601,28 @@ contact routing with zero component edits. Remaining per-client layers are
 documented: Layer 2 = lib/ content files + scroll-story copy; Layer 3 = page copy
 in src/app/. Sapper renders identically (config values unchanged). Build = 55 routes,
 green. On `dev`; not merged to main.
+
+---
+
+## Neutral base template (template-base branch)
+
+Goal: a brand-empty foundation to showcase the repeatable stack, with 2 branded
+projects (Sapper + Client 2) running off it.
+
+- [x] dev: text-wordmark logo fallback (renders shortName when no logo file)
+- [x] template-base: branched from dev
+- [x] Guard GTM injection on empty gtmId (template feature — no tag for clients w/o GTM)
+- [x] Neutral siteConfig: brand "Northbound", slate/sky palette, blank logos/attribution,
+      placeholder NAP/contact/stats, gtmId "" 
+- [x] Genericize content: TEAM + TEAM_MEMBERS → placeholder roles + initials badges (no photos),
+      no dossier slugs; brand-name sweep across all of src
+- [x] Soften military-themed home/story copy (attack→campaign, recon→research, lock→focus)
+- [x] Build green (44 routes); pushed template-base
+
+### Review
+template-base is a config-driven neutral foundation: boots with ZERO brand assets
+(wordmark logo + initials team badges), neutral palette from siteConfig.brandColors,
+no GTM/booking wired. Same components/framework as Sapper — only config + content differ.
+Becomes the base repo; Client 2 forks it and swaps siteConfig + content.
+NOTE: wordmark fallback is on dev (framework); GTM guard currently only on template-base
+— cherry-pick to dev when convenient so main/Sapper gets it too.

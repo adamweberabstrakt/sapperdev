@@ -9,11 +9,11 @@ import { CASE_STUDIES } from "@/lib/constants";
 
 export const metadata = {
   description:
-    "Outbound B2B appointment setting built on a verified, intent-scored dream-ICP target list. One coordinated attack — calling, email, and LinkedIn — against your named decision-makers.",
+    "Outbound B2B appointment setting built on a verified, intent-scored ideal-customer target list. One coordinated campaign — calling, email, and LinkedIn — against your named decision-makers.",
 };
 
 const LIST_BULLETS = [
-  "Cleansed, intent-sought, dream-ICP list. Not bought and cloned.",
+  "Cleansed, intent-sought, ideal-customer list. Not bought and cloned.",
   "Coordinated motion across every channel. Not single-channel spray.",
   "Decision-makers. Not gatekeepers.",
   "Brand-persona trust, built deliberately — so your buyers believe you.",
@@ -31,7 +31,7 @@ const CHANNELS = [
     index: "01",
     title: "Structured Calling",
     href: "/b2b-cold-calling",
-    desc: "Disciplined dials into the HIT list — decision-makers, not gatekeepers.",
+    desc: "Disciplined dials into the target list — decision-makers, not gatekeepers.",
   },
   {
     index: "02",
@@ -55,8 +55,8 @@ const CHANNELS = [
 
 const ABM_STEPS = [
   { n: "01", title: "Pick the targets", desc: "You choose the dream accounts. The named list is the mission." },
-  { n: "02", title: "Build the HIT list", desc: "We verify emails, identify mobiles, and score real intent." },
-  { n: "03", title: "Coordinated attack", desc: "Calls, email, and LinkedIn lock onto the same buyers." },
+  { n: "02", title: "Build the target list", desc: "We verify emails, identify mobiles, and score real intent." },
+  { n: "03", title: "Coordinated campaign", desc: "Calls, email, and LinkedIn focus on the same buyers." },
   { n: "04", title: "Meetings booked", desc: "Decision-makers land on your calendar — and the list is yours." },
 ];
 
@@ -70,14 +70,14 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.25em] text-steel animate-fade-up">
             <span>Operation 001 / High Impact Target</span>
-            <span className="hidden sm:inline">Internal // Sapper</span>
+            <span className="hidden sm:inline">Internal // Northbound</span>
           </div>
 
           <h1
             className="mt-8 max-w-5xl font-display text-5xl uppercase leading-[0.92] sm:text-7xl lg:text-8xl animate-fade-up"
             style={{ animationDelay: "0.08s" }}
           >
-            One coordinated attack on the{" "}
+            One coordinated campaign on the{" "}
             <span className="text-acid">accounts</span> you&apos;ve always wanted.
           </h1>
 
@@ -85,7 +85,7 @@ export default function Home() {
             className="mt-8 max-w-2xl text-lg text-bone/70 sm:text-xl animate-fade-up"
             style={{ animationDelay: "0.16s" }}
           >
-            Outbound B2B appointment setting built on a dream-ICP target list
+            Outbound B2B appointment setting built on a ideal-customer target list
             that&apos;s verified, intent-scored, and impossible to copy. The list
             is the edge — every channel locks onto the same named decision-makers.
           </p>
@@ -218,7 +218,7 @@ export default function Home() {
               <span className="text-acid">run like a hit list.</span>
             </h2>
             <p className="mt-6 max-w-3xl text-bone/70">
-              You name the accounts. We build the enriched HIT list around them —
+              You name the accounts. We build the enriched target list around them —
               verified emails, identified mobiles, live intent signals — then run
               every channel against the same decision-makers until the meetings
               land. The enriched list is yours to keep, even if you stop here.
@@ -280,7 +280,7 @@ export default function Home() {
               Ready to hit your <span className="text-acid">dream accounts?</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-bone/70">
-              One coordinated attack. One target list. Every channel pointed at
+              One coordinated campaign. One target list. Every channel pointed at
               the decision-makers you actually want.
             </p>
             <div className="mt-10">

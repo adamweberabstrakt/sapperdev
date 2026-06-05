@@ -3,9 +3,9 @@ import BookingButton from "@/components/ui/BookingButton";
 import MethodScrollStory from "@/components/method/MethodScrollStory";
 
 export const metadata = {
-  title: "Hit Your Appointment Goals | The HIT Method — Sapper",
+  title: "Hit Your Appointment Goals | Our Method — Northbound",
   description:
-    "Set an appointment goal. We build the demand-gen outbound engine that hits it — LinkedIn-led awareness, 500 guaranteed dials, intent-triggered email, and a scored HIT list you keep. Live in 14 days.",
+    "Set an appointment goal. We build the demand-gen outbound engine that hits it — LinkedIn-led awareness, 500 guaranteed dials, intent-triggered email, and a scored target list you keep. Live in 14 days.",
   // PPC landing page — keep it out of organic search so it doesn't compete with the site.
   robots: { index: false, follow: true },
 };
@@ -66,7 +66,7 @@ export default function HitAppointmentGoals() {
         <div className="absolute inset-0 bg-tactical-grid opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-acid animate-fade-up">
-            The HIT Method · Demand-Gen Outbound
+            Our Method · Demand-Gen Outbound
           </p>
           <h1
             className="mt-8 max-w-4xl font-display text-5xl uppercase leading-[0.92] sm:text-6xl lg:text-7xl animate-fade-up"
@@ -93,7 +93,7 @@ export default function HitAppointmentGoals() {
               ["14 days", "to live"],
               ["500", "guaranteed dials"],
               ["$2,500", "managed ad spend"],
-              ["HIT list", "yours to keep"],
+              ["target list", "yours to keep"],
             ].map(([big, small]) => (
               <div key={small} className="bg-ink px-5 py-6">
                 <p className="font-display text-3xl text-acid sm:text-4xl">{big}</p>
@@ -176,7 +176,7 @@ export default function HitAppointmentGoals() {
             </h2>
             <p className="mt-5 max-w-2xl text-bone/70">
               Two weeks from yes to live. Week one we construct the engine — reverse-engineer your dream ICP,
-              stand up the brand personas, build the scored HIT list, load the content and cadence. Week two it
+              stand up the brand personas, build the scored target list, load the content and cadence. Week two it
               goes live: posts publish, retargeting wires up, calling and email fire.
             </p>
           </AnimateIn>

@@ -6,7 +6,7 @@ a small content file. Built once, reused across client sites and landing pages.
 
 Live examples in this repo:
 
-- `src/components/method/MethodScrollStory.tsx` — the Sapper "build the list" story (home + process).
+- `src/components/method/MethodScrollStory.tsx` — the Northbound "build the list" story (home + process).
 - `src/components/stories/DemandGenScrollStory.tsx` — the two-stack Demand Gen story (`/demand-generation`).
 
 ---

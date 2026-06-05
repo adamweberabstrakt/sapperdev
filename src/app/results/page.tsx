@@ -9,7 +9,7 @@ import { CASE_STUDIES_DETAILED, missionLabel } from "@/lib/caseStudies";
 export const metadata = {
   title: "Results",
   description:
-    "Real Sapper client results across 80+ industries: booked meetings, recurring revenue, and closed deals from coordinated outbound built on verified target lists.",
+    "Real Northbound client results across 80+ industries: booked meetings, recurring revenue, and closed deals from coordinated outbound built on verified target lists.",
 };
 
 const STATS = SITE_STATS;
@@ -56,11 +56,11 @@ export default function Results() {
             Briefing / See It In Action
           </p>
           <h2 className="mt-5 max-w-3xl font-display text-3xl uppercase leading-[0.95] sm:text-4xl">
-            How Sapper fills a pipeline.
+            How Northbound fills a pipeline.
           </h2>
         </AnimateIn>
         <AnimateIn delay={0.1} className="mt-8">
-          <VideoEmbed id="GMiD_HGFi94" title="How Sapper fills a pipeline" />
+          <VideoEmbed id="GMiD_HGFi94" title="How Northbound fills a pipeline" />
         </AnimateIn>
       </Section>
 
@@ -103,7 +103,7 @@ export default function Results() {
                 Featured Case File / Interactive
               </span>
               <h3 className="mt-3 font-display text-2xl uppercase leading-[0.98] sm:text-3xl">
-                TeamLogic IT — 70% of annual sales from Sapper leads
+                TeamLogic IT — 70% of annual sales from Northbound leads
               </h3>
               <p className="mt-3 max-w-2xl text-sm text-bone/70">
                 A managed IT franchise with no sales background — and how the operation landed its two highest-paying clients.
