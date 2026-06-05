@@ -41,7 +41,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             ← All Case Files
           </Link>
           <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.25em] text-steel">
-            Case File / {cs.industry}
+            Mission Report <span className="text-acid">#{cs.reportNo}</span>: {cs.industry}
           </p>
           <p className="mt-4 font-display text-6xl text-acid sm:text-7xl">{cs.metric}</p>
           <h1 className="mt-4 font-display text-3xl uppercase leading-[0.95] sm:text-4xl">

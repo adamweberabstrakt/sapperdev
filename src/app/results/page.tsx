@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
 import VideoEmbed from "@/components/ui/VideoEmbed";
-import { CASE_STUDIES_DETAILED } from "@/lib/caseStudies";
+import { CASE_STUDIES_DETAILED, missionLabel } from "@/lib/caseStudies";
 
 export const metadata = {
   title: "Results",
@@ -123,7 +123,7 @@ export default function Results() {
                 className="group flex h-full flex-col bg-ink p-8 transition-colors hover:bg-panel"
               >
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-steel">
-                  {cs.industry}
+                  {missionLabel(cs)}
                 </span>
                 <p className="mt-4 font-display text-5xl text-acid">{cs.metric}</p>
                 <p className="mt-4 flex-1 text-sm text-bone/70">{cs.summary}</p>

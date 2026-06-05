@@ -1,5 +1,7 @@
 export interface CaseStudy {
   slug: string;
+  /** Mission Report number — shown as a design element on the case study. */
+  reportNo: number;
   industry: string;
   metric: string; // headline number for cards
   summary: string; // card line + meta description
@@ -13,6 +15,7 @@ export interface CaseStudy {
 export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   {
     slug: "cybersecurity",
+    reportNo: 101,
     industry: "Cybersecurity",
     metric: "$360K",
     summary:
@@ -26,6 +29,7 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   },
   {
     slug: "it-msp",
+    reportNo: 102,
     industry: "IT / MSP",
     metric: "$212K",
     summary:
@@ -39,6 +43,7 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   },
   {
     slug: "manufacturing",
+    reportNo: 104,
     industry: "Manufacturing",
     metric: "31 meetings",
     summary:
@@ -52,6 +57,7 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   },
   {
     slug: "roofing",
+    reportNo: 109,
     industry: "Roofing",
     metric: "$300K",
     summary:
@@ -65,6 +71,7 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   },
   {
     slug: "commercial-cleaning",
+    reportNo: 113,
     industry: "Commercial Cleaning",
     metric: "$125K+",
     summary:
@@ -78,6 +85,7 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
   },
   {
     slug: "recruiting",
+    reportNo: 118,
     industry: "Recruiting",
     metric: "$40K",
     summary:
@@ -90,3 +98,6 @@ export const CASE_STUDIES_DETAILED: CaseStudy[] = [
       "In their first month, the very first meeting we booked produced a $40,000 proposal for a unique position — secured off a single warm call.",
   },
 ];
+
+export const missionLabel = (cs: CaseStudy) =>
+  `Mission Report #${cs.reportNo}: ${cs.industry}`;
