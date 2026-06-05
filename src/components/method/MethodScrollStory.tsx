@@ -168,25 +168,37 @@ function ListIcon({ progress }: { progress: MotionValue<number> }) {
 }
 
 function PulseLine({
-  progress, from, to, appear, dur = 1.6,
+  progress, from, to, appear, dur = 1.6, dim,
 }: {
   progress: MotionValue<number>;
   from: { x: number; y: number };
   to: { x: number; y: number };
   appear: [number, number];
   dur?: number;
+  // When set, the moving pulse fades to `to` over the `at` window (the static
+  // base line stays), so an earlier flow quiets down as a new one appears.
+  dim?: { at: [number, number]; to: number };
 }) {
-  const opacity = useTransform(progress, appear, [0, 1]);
+  const baseOpacity = useTransform(progress, appear, [0, 0.3]);
+  const pulseOpacity = useTransform(
+    progress,
+    dim ? [appear[0], appear[1], dim.at[0], dim.at[1]] : appear,
+    dim ? [0, 1, 1, dim.to] : [0, 1]
+  );
   return (
-    <motion.g style={{ opacity }}>
-      <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke={steel} strokeOpacity={0.28} strokeWidth={1.5} />
+    <g>
+      <motion.line
+        x1={from.x} y1={from.y} x2={to.x} y2={to.y}
+        stroke={steel} strokeWidth={1.5} style={{ opacity: baseOpacity }}
+      />
       <motion.line
         x1={from.x} y1={from.y} x2={to.x} y2={to.y}
         stroke={acid} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="6 80"
+        style={{ opacity: pulseOpacity }}
         animate={{ strokeDashoffset: [86, 0] }}
         transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
       />
-    </motion.g>
+    </g>
   );
 }
 
@@ -389,7 +401,7 @@ function AnimatedStory() {
         <div className="absolute inset-0 z-0 flex items-center justify-center px-4">
           <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" className="h-full max-h-[66vh] w-full max-w-5xl">
             {CHANNELS.map((c, i) => (
-              <PulseLine key={`cl${i}`} progress={scrollYProgress} from={{ x: c.x, y: c.y }} to={GC} appear={[0.44 + i * 0.015, 0.54]} dur={1.4 + i * 0.18} />
+              <PulseLine key={`cl${i}`} progress={scrollYProgress} from={{ x: c.x, y: c.y }} to={GC} appear={[0.44 + i * 0.015, 0.54]} dur={1.4 + i * 0.18} dim={{ at: [0.58, 0.66], to: 0.12 }} />
             ))}
             {SOURCES.map((s, i) => (
               <PulseLine key={`sl${i}`} progress={scrollYProgress} from={{ x: s.x, y: s.y }} to={HUB} appear={[0.6 + i * 0.015, 0.68]} dur={1.5 + i * 0.16} />
