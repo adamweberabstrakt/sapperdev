@@ -501,7 +501,7 @@ Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process
 ## Staged build (smallest-blast-radius, review between each)
 - [x] A: add `danger` token; build component skeleton + phases 1-3 (list->universe->filter);
       place on home after hero; ship; review motion feel.
-- [ ] B: add phase 4 (4 channels strike list) + phase 5 (website/LinkedIn inbound recon
+- [x] B: add phase 4 (4 channels strike list) + phase 5 (website/LinkedIn inbound recon
       feeding new people) with connecting lines/particles; ship; review.
 - [ ] C: phase 6 settle + CTA; caption polish; reduced-motion + mobile fallback; a11y; ship.
 - [ ] D (optional): port a longer variant to /process (augment or replace DataLoop).
