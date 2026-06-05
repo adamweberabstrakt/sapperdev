@@ -2,6 +2,7 @@ import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
 import DataLoop from "@/components/process/DataLoop";
+import MethodScrollStory from "@/components/method/MethodScrollStory";
 
 export const metadata = {
   title: "Process — The Data Loop",
@@ -32,6 +33,9 @@ export default function Process() {
           </p>
         </div>
       </section>
+
+      {/* METHOD SCROLL STORY */}
+      <MethodScrollStory />
 
       {/* DATA LOOP */}
       <Section bg="ink">

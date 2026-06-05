@@ -6,6 +6,9 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useMotionValue,
+  useInView,
+  animate,
   type MotionValue,
 } from "framer-motion";
 import BookingButton from "@/components/ui/BookingButton";
@@ -15,28 +18,27 @@ export type Beat = {
   step: string;
   title: string;
   line: string;
-  /** Scroll-progress window [start, end] in 0..1 where this caption is shown. */
+  /** Progress window [start, end] in 0..1 where this caption shows. */
   win: [number, number];
-  /** Render the CTA button on this beat. */
   cta?: boolean;
 };
 
 export type ScrollStoryProps = {
-  /** Mono kicker label, e.g. "Operation / The Pursuit". */
   label: string;
-  /** Heading announced to screen readers (the visual stage is decorative). */
   srHeading: string;
   beats: Beat[];
-  /** Animated SVG scene; receives the shared scroll progress. */
   scene: (progress: MotionValue<number>) => ReactNode;
-  /** One static frame per beat, for the no-motion / mobile / SSR fallback. */
   staticScene: (index: number) => ReactNode;
-  /** Heading for the static fallback section. */
   staticTitle: ReactNode;
   viewBox?: string;
   heightVh?: number;
   ctaLabel?: string;
   onCta?: () => void;
+  /** "scroll" pins and scrubs on scroll (marketing pages); "autoplay" plays
+   *  once when scrolled into view (PPC landing pages). */
+  trigger?: "scroll" | "autoplay";
+  /** Autoplay duration in seconds (defaults to ~1.8s per beat). */
+  duration?: number;
 };
 
 /* ------------------------------------------------------------------ hooks */
@@ -72,10 +74,15 @@ function CornerTicks() {
 }
 
 function Caption({
-  progress, step, title, line, win, cta, ctaLabel, onCta,
-}: Beat & { progress: MotionValue<number>; ctaLabel: string; onCta: () => void }) {
+  progress, step, title, line, win, cta, ctaLabel, onCta, last,
+}: Beat & { progress: MotionValue<number>; ctaLabel: string; onCta: () => void; last: boolean }) {
   const [a, b] = win;
-  const opacity = useTransform(progress, [a, a + 0.03, b - 0.04, b], [0, 1, 1, 0]);
+  // The final beat holds (doesn't fade out) so the CTA stays put at the end.
+  const opacity = useTransform(
+    progress,
+    last ? [a, a + 0.03] : [a, a + 0.03, b - 0.04, b],
+    last ? [0, 1] : [0, 1, 1, 0]
+  );
   const y = useTransform(progress, [a, a + 0.045], [18, 0]);
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-x-0 bottom-0">
@@ -96,47 +103,90 @@ function Caption({
   );
 }
 
-/* --------------------------------------------------------- animated story */
-function AnimatedStory(p: Required<Pick<ScrollStoryProps, "label" | "srHeading" | "beats" | "scene" | "viewBox" | "heightVh" | "ctaLabel" | "onCta">>) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+type StageConfig = {
+  label: string; beats: Beat[]; viewBox: string;
+  scene: (p: MotionValue<number>) => ReactNode; ctaLabel: string; onCta: () => void;
+};
+type StageProps = StageConfig & { progress: MotionValue<number> };
 
+/** The visual stage; shared by both trigger modes. */
+function StageInner({ progress, label, beats, viewBox, scene, ctaLabel, onCta }: StageProps) {
   return (
-    <section ref={ref} style={{ height: `${p.heightVh}vh` }} className="relative bg-ink text-bone">
-      <h2 className="sr-only">{p.srHeading}</h2>
+    <>
+      <div className="absolute inset-0 bg-tactical-grid opacity-60" />
+      <CornerTicks />
+      <p className="absolute left-4 top-8 z-10 font-mono text-[11px] uppercase tracking-[0.25em] text-acid sm:left-8">
+        {label}
+      </p>
+
+      <div className="absolute inset-0 z-0 flex items-center justify-center px-4">
+        <svg viewBox={viewBox} preserveAspectRatio="xMidYMid meet" className="h-full max-h-[66vh] w-full max-w-5xl">
+          {scene(progress)}
+        </svg>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-16 z-10 mx-auto max-w-3xl px-4 sm:px-8">
+        {beats.map((b, i) => (
+          <Caption key={i} progress={progress} ctaLabel={ctaLabel} onCta={onCta} last={i === beats.length - 1} {...b} />
+        ))}
+      </div>
+
+      <motion.div style={{ scaleX: progress }} className="absolute bottom-0 left-0 z-20 h-1 w-full origin-left bg-acid" />
+    </>
+  );
+}
+
+function SrNarrative({ srHeading, beats }: { srHeading: string; beats: Beat[] }) {
+  return (
+    <>
+      <h2 className="sr-only">{srHeading}</h2>
       <ol className="sr-only">
-        {p.beats.map((b, i) => (
+        {beats.map((b, i) => (
           <li key={i}>{`${b.step}: ${b.title} ${b.line}`}</li>
         ))}
       </ol>
+    </>
+  );
+}
 
+/* ------------------------------------------------------------ scroll mode */
+function ScrollStage(p: StageConfig & { srHeading: string; heightVh: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  return (
+    <section ref={ref} style={{ height: `${p.heightVh}vh` }} className="relative bg-ink text-bone">
+      <SrNarrative srHeading={p.srHeading} beats={p.beats} />
       <div className="sticky top-0 h-screen overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-tactical-grid opacity-60" />
-        <CornerTicks />
-        <p className="absolute left-4 top-8 z-10 font-mono text-[11px] uppercase tracking-[0.25em] text-acid sm:left-8">
-          {p.label}
-        </p>
+        <StageInner {...p} progress={scrollYProgress} />
+      </div>
+    </section>
+  );
+}
 
-        <div className="absolute inset-0 z-0 flex items-center justify-center px-4">
-          <svg viewBox={p.viewBox} preserveAspectRatio="xMidYMid meet" className="h-full max-h-[66vh] w-full max-w-5xl">
-            {p.scene(scrollYProgress)}
-          </svg>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-16 z-10 mx-auto max-w-3xl px-4 sm:px-8">
-          {p.beats.map((b, i) => (
-            <Caption key={i} progress={scrollYProgress} ctaLabel={p.ctaLabel} onCta={p.onCta} {...b} />
-          ))}
-        </div>
-
-        <motion.div style={{ scaleX: scrollYProgress }} className="absolute bottom-0 left-0 z-20 h-1 w-full origin-left bg-acid" />
+/* ---------------------------------------------------------- autoplay mode */
+function AutoplayStage(p: StageConfig & { srHeading: string; duration: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.5 });
+  const progress = useMotionValue(0);
+  useEffect(() => {
+    if (inView) {
+      const controls = animate(progress, 1, { duration: p.duration, ease: "linear" });
+      return () => controls.stop();
+    }
+    progress.set(0);
+  }, [inView, p.duration, progress]);
+  return (
+    <section ref={ref} className="relative h-screen overflow-hidden bg-ink text-bone">
+      <SrNarrative srHeading={p.srHeading} beats={p.beats} />
+      <div className="absolute inset-0" aria-hidden>
+        <StageInner {...p} progress={progress} />
       </div>
     </section>
   );
 }
 
 /* ---------------------------------------------------------- static fallback */
-function StaticStory(p: Required<Pick<ScrollStoryProps, "label" | "beats" | "staticScene" | "staticTitle" | "ctaLabel">>) {
+function StaticStory(p: { label: string; beats: Beat[]; staticScene: (i: number) => ReactNode; staticTitle: ReactNode; ctaLabel: string }) {
   return (
     <section className="relative overflow-hidden bg-ink text-bone">
       <div className="absolute inset-0 bg-tactical-grid opacity-50" aria-hidden />
@@ -168,19 +218,20 @@ export default function ScrollStory({
   heightVh,
   ctaLabel = "Book a strategy call",
   onCta = defaultCta,
+  trigger = "scroll",
+  duration,
 }: ScrollStoryProps) {
   const hydrated = useHydrated();
   const reduce = useReducedMotion();
   const compact = useMediaQuery("(max-width: 640px)");
-  const height = heightVh ?? beats.length * 110;
 
   if (!hydrated || reduce || compact) {
     return <StaticStory label={label} beats={beats} staticScene={staticScene} staticTitle={staticTitle} ctaLabel={ctaLabel} />;
   }
-  return (
-    <AnimatedStory
-      label={label} srHeading={srHeading} beats={beats} scene={scene}
-      viewBox={viewBox} heightVh={height} ctaLabel={ctaLabel} onCta={onCta}
-    />
-  );
+
+  const stage = { label, beats, viewBox, scene, ctaLabel, onCta };
+  if (trigger === "autoplay") {
+    return <AutoplayStage {...stage} srHeading={srHeading} duration={duration ?? beats.length * 1.8} />;
+  }
+  return <ScrollStage {...stage} srHeading={srHeading} heightVh={heightVh ?? beats.length * 110} />;
 }
