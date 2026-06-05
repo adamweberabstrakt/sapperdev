@@ -552,6 +552,6 @@ variations across client sites + PPC landing pages that show how services coordi
 - [x] R1: extract ENGINE; rebuild current Sapper story on it with ZERO visual change; verify live identical.
 - [x] R2: extract scene ATOMS; recompose Sapper scene from atoms.
 - [ ] R3: add autoplay-in-view trigger mode (PPC variant, fewer beats).
-- [ ] R4: build a 2nd proof story (one service) to set the copy-paste pattern.
+- [x] R4: build a 2nd proof story (Demand Generation) (one service) to set the copy-paste pattern.
 - [ ] R5: document in template repo (how to author a new story).
 - [ ] (then) port a variant to /process.
