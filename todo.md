@@ -461,3 +461,54 @@ only remaining cause is ChiliPiper-side config:
 - `src/app/sitemap.ts`: added all 6 `/team/[slug]` URLs.
 - Build green; live 200s verified. **Site now = 44 content pages** (38 + 6 dossiers).
 - NOTE: strengths + weaknesses are drafted placeholders for client review. Authored-post links: Amie, Jeff, Tony each have 1 post today; the other three show the empty state until they have a byline.
+
+---
+
+# PLAN — Home "Method" Scroll Story (scrollytelling)  [AWAITING APPROVAL]
+
+## Objective
+A scroll-driven, pinned animation that dramatizes the Sapper method in one continuous
+sequence. As the user scrolls a tall section, a sticky stage illustrates:
+1. one perfect list →
+2. it expands into many people (the universe) →
+3. ~half flash red and are removed (filtering / data quality); survivors turn acid-green →
+4. four channels (direct mail, LinkedIn, phone, email) strike the verified list →
+5. website + LinkedIn-page sources reveal and feed NEW decision-makers into the list (always-on recon) →
+6. steady cross-channel loop (outbound + inbound running at once) + CTA.
+Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process variant later.
+
+## Tech approach (front-end only; no backend, illustrative)
+- New reusable client component: src/components/method/MethodScrollStory.tsx ("use client").
+- Tall outer wrapper (~h-[500vh] desktop) + inner `sticky top-0 h-screen` stage.
+- Framer Motion useScroll({target, offset:["start start","end end"]}) -> scrollYProgress 0..1.
+- Map progress to 6 phase windows via useTransform; each SVG element reads its own
+  motion values (opacity/x/y/scale/fill). Drive color via fill on inline SVG (currentColor).
+- Captions: 6 mono "STEP 0X / TITLE + line" panels that crossfade per phase window.
+- Icons: hand-drawn inline SVG line icons (list, person, mailer, linkedin, phone, mail,
+  globe/website) in tactical style — no new dependency. (Alt: install lucide-react.)
+- Performance: animate transform/opacity/fill only; positions via useMemo; motion values
+  (no per-frame setState); ~16 person icons cap; dynamic import ssr:false if needed.
+
+## New brand token
+- Add `danger` red to siteConfig.brandColors (single source of truth) + tailwind.
+  acid (#B6F22B) = "verified/good"; danger = "filtered out". (Exact red TBD on approval.)
+
+## Accessibility / fallback
+- prefers-reduced-motion (framer useReducedMotion): render static stacked 6-panel version.
+- Decorative SVG aria-hidden; include a visually-hidden ordered list of the 6 steps for SR.
+- Mobile (<sm): default to stacked static panels for performance (vs. heavy pinned scroll).
+
+## Staged build (smallest-blast-radius, review between each)
+- [ ] A: add `danger` token; build component skeleton + phases 1-3 (list->universe->filter);
+      place on home after hero; ship; review motion feel.
+- [ ] B: add phase 4 (4 channels strike list) + phase 5 (website/LinkedIn inbound recon
+      feeding new people) with connecting lines/particles; ship; review.
+- [ ] C: phase 6 settle + CTA; caption polish; reduced-motion + mobile fallback; a11y; ship.
+- [ ] D (optional): port a longer variant to /process (augment or replace DataLoop).
+
+## Open questions (see chat)
+1. Mobile: stacked static panels under sm (recommended) vs. simplified pinned scroll?
+2. Red token OK? acid=verified, danger=removed. Pick a red for me or specify?
+3. Inbound sources = website-visitor data + LinkedIn only, or add a 3rd (e.g., intent data)?
+4. I'll draft the 6 captions for you to edit — confirm tone (mission/dossier voice).
+5. Confirm illustrative only (no live data / no backend).
