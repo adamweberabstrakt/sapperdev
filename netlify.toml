@@ -1,0 +1,10 @@
+# Netlify config for this Next.js 14 (App Router) site.
+# Netlify auto-installs the Next.js Runtime v5; this just pins the build basics.
+[build]
+  command = "next build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
