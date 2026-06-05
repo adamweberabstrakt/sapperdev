@@ -526,3 +526,32 @@ Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process
   version (real text + CTA, crawlable). Animated path exposes an sr-only heading + ordered
   list for screen readers; decorative SVG/captions aria-hidden; pinned CTA tabIndex -1.
 - Optional follow-ups: tune right-side line density during recon; port a variant to /process.
+
+---
+
+# PLAN — ScrollStory framework (reusable across client sites)  [APPROVED — building]
+
+## Goal
+Turn the home Method animation into a reusable framework so we can ship per-service
+variations across client sites + PPC landing pages that show how services coordinate.
+
+## Architecture (two layers)
+- Layer 1 — ScrollStory ENGINE (write once): pinned stage, scroll wiring, caption
+  timeline, progress bar, a11y SR summary, static/mobile/reduced-motion fallback,
+  brand tokens. API: <ScrollStory label srHeading beats scene staticScene staticTitle
+  viewBox? heightVh? ctaLabel? onCta? />. Lives in src/components/scrollstory/.
+- Layer 2 — SCENE ATOM LIBRARY (compose scenes): PulseLine, IconNode, EntityCluster
+  (emerge→scatter→filter→grid, parameterized), SignalHub, Reticle, Glyphs.
+- A "story" = a Scene + beats config, in src/components/stories/. Ships in template repo.
+
+## Decisions (defaults — flag to change)
+- Trigger modes: scroll-pinned (marketing pages) + autoplay-in-view (PPC LPs, shorter).
+- Authoring: developer-written Scenes composed from atoms now; JSON/CMS-driven schema later (Sanity).
+
+## Staged build
+- [ ] R1: extract ENGINE; rebuild current Sapper story on it with ZERO visual change; verify live identical.
+- [ ] R2: extract scene ATOMS; recompose Sapper scene from atoms.
+- [ ] R3: add autoplay-in-view trigger mode (PPC variant, fewer beats).
+- [ ] R4: build a 2nd proof story (one service) to set the copy-paste pattern.
+- [ ] R5: document in template repo (how to author a new story).
+- [ ] (then) port a variant to /process.

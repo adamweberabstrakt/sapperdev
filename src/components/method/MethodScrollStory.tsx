@@ -1,22 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useTransform, type MotionValue } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
-import BookingButton from "@/components/ui/BookingButton";
+import ScrollStory, { type Beat } from "@/components/scrollstory/ScrollStory";
 
 const { acid, steel, danger, panel } = siteConfig.brandColors as Record<string, string>;
 
 /* ------------------------------------------------------------------ layout */
 const CENTER = { x: 500, y: 300 };
-const GC = { x: 515, y: 305 }; // verified-grid center (channel target)
-const HUB = { x: 500, y: 178 }; // signal / KDM-match node
+const GC = { x: 515, y: 305 };
+const HUB = { x: 500, y: 178 };
 
 const SCATTER: [number, number, boolean][] = [
   [180, 160, false], [300, 130, true], [430, 150, false], [560, 120, true],
@@ -52,66 +45,16 @@ const RECRUITS = [
   { x: 715, y: 355, appear: [0.74, 0.84] as [number, number] },
 ];
 
-type Phase = { step: string; title: string; line: string; win: [number, number]; cta?: boolean };
-const PHASES: Phase[] = [
-  {
-    step: "01 / The Perfect List",
-    title: "It starts with the list.",
-    line: "Every campaign begins with one precise, intent-built target list — not a bought-and-blasted database.",
-    win: [0.0, 0.14],
-  },
-  {
-    step: "02 / The Universe",
-    title: "Map the whole market.",
-    line: "We open it up into every potential buyer in your space — the full universe of in-market accounts.",
-    win: [0.14, 0.26],
-  },
-  {
-    step: "03 / Data Quality",
-    title: "Cut everything that isn't real.",
-    line: "Then we verify and filter. Bad data and bad-fit accounts are removed. Only real, reachable decision-makers survive.",
-    win: [0.26, 0.4],
-  },
-  {
-    step: "04 / Coordinated Motion",
-    title: "Every channel. One list.",
-    line: "Direct mail, LinkedIn, calls, and email pulse against the same verified decision-makers — one coordinated motion, not single-channel spray.",
-    win: [0.4, 0.56],
-  },
-  {
-    step: "05 / Always-On Recon",
-    title: "The list feeds itself.",
-    line: "Form fills, meeting bookings, site visits, and social signals reveal company intent. We research the buying committee and feed the right new decision-makers back into the list.",
-    win: [0.56, 0.78],
-  },
-  {
-    step: "06 / The Pursuit",
-    title: "A pipeline on a loop.",
-    line: "Outbound motion and always-on recon run at once — a self-feeding pipeline that compounds, so qualified meetings keep landing on your calendar.",
-    win: [0.78, 1.0],
-    cta: true,
-  },
+const BEATS: Beat[] = [
+  { step: "01 / The Perfect List", title: "It starts with the list.", line: "Every campaign begins with one precise, intent-built target list — not a bought-and-blasted database.", win: [0.0, 0.14] },
+  { step: "02 / The Universe", title: "Map the whole market.", line: "We open it up into every potential buyer in your space — the full universe of in-market accounts.", win: [0.14, 0.26] },
+  { step: "03 / Data Quality", title: "Cut everything that isn't real.", line: "Then we verify and filter. Bad data and bad-fit accounts are removed. Only real, reachable decision-makers survive.", win: [0.26, 0.4] },
+  { step: "04 / Coordinated Motion", title: "Every channel. One list.", line: "Direct mail, LinkedIn, calls, and email pulse against the same verified decision-makers — one coordinated motion, not single-channel spray.", win: [0.4, 0.56] },
+  { step: "05 / Always-On Recon", title: "The list feeds itself.", line: "Form fills, meeting bookings, site visits, and social signals reveal company intent. We research the buying committee and feed the right new decision-makers back into the list.", win: [0.56, 0.78] },
+  { step: "06 / The Pursuit", title: "A pipeline on a loop.", line: "Outbound motion and always-on recon run at once — a self-feeding pipeline that compounds, so qualified meetings keep landing on your calendar.", win: [0.78, 1.0], cta: true },
 ];
 
-/* ------------------------------------------------------------------ hooks */
-function useHydrated() {
-  const [h, setH] = useState(false);
-  useEffect(() => setH(true), []);
-  return h;
-}
-function useMediaQuery(q: string) {
-  const [m, setM] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(q);
-    const on = () => setM(mq.matches);
-    on();
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, [q]);
-  return m;
-}
-
-/* --------------------------------------------------------------- svg bits */
+/* --------------------------------------------------------------- svg atoms */
 function PersonShape() {
   return (
     <>
@@ -134,16 +77,8 @@ function Person({ p, progress }: { p: (typeof PERSONS)[number]; progress: Motion
   const yVal = p.good ? [CENTER.y, p.uy, p.uy, p.gy] : [CENTER.y, p.uy, p.uy, p.uy + 260];
   const x = useTransform(progress, kf, xVal);
   const y = useTransform(progress, kf, yVal);
-  const opacity = useTransform(
-    progress,
-    p.good ? [0.03, 0.12] : [0.03, 0.12, 0.34, 0.4],
-    p.good ? [0, 1] : [0, 1, 1, 0]
-  );
-  const color = useTransform(
-    progress,
-    p.good ? [0.3, 0.38] : [0.28, 0.34],
-    p.good ? [steel, acid] : [steel, danger]
-  );
+  const opacity = useTransform(progress, p.good ? [0.03, 0.12] : [0.03, 0.12, 0.34, 0.4], p.good ? [0, 1] : [0, 1, 1, 0]);
+  const color = useTransform(progress, p.good ? [0.3, 0.38] : [0.28, 0.34], p.good ? [steel, acid] : [steel, danger]);
   return (
     <motion.g style={{ x, y, opacity, color }}>
       <PersonShape />
@@ -175,8 +110,6 @@ function PulseLine({
   to: { x: number; y: number };
   appear: [number, number];
   dur?: number;
-  // When set, the moving pulse fades to `to` over the `at` window (the static
-  // base line stays), so an earlier flow quiets down as a new one appears.
   dim?: { at: [number, number]; to: number };
 }) {
   const baseOpacity = useTransform(progress, appear, [0, 0.3]);
@@ -187,10 +120,7 @@ function PulseLine({
   );
   return (
     <g>
-      <motion.line
-        x1={from.x} y1={from.y} x2={to.x} y2={to.y}
-        stroke={steel} strokeWidth={1.5} style={{ opacity: baseOpacity }}
-      />
+      <motion.line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke={steel} strokeWidth={1.5} style={{ opacity: baseOpacity }} />
       <motion.line
         x1={from.x} y1={from.y} x2={to.x} y2={to.y}
         stroke={acid} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="6 80"
@@ -273,9 +203,7 @@ function IconNode({
     <motion.g style={{ x, y, opacity, scale }}>
       <rect x="-27" y="-27" width="54" height="54" rx="10" fill={panel} stroke={acid} strokeWidth="2" />
       {kind === "channel" ? <ChannelIcon name={name} /> : <SourceIcon name={name} />}
-      <text y="44" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">
-        {label}
-      </text>
+      <text y="44" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">{label}</text>
     </motion.g>
   );
 }
@@ -285,20 +213,14 @@ function SignalHub({ progress }: { progress: MotionValue<number> }) {
   const scale = useTransform(progress, [0.62, 0.7], [0.6, 1]);
   return (
     <motion.g style={{ x: HUB.x, y: HUB.y, opacity, scale }}>
-      <motion.circle
-        cx="0" cy="0" r="20" fill="none" stroke={acid} strokeWidth="2"
-        animate={{ scale: [1, 1.9], opacity: [0.6, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-      />
+      <motion.circle cx="0" cy="0" r="20" fill="none" stroke={acid} strokeWidth="2" animate={{ scale: [1, 1.9], opacity: [0.6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }} />
       <circle cx="0" cy="0" r="20" fill={panel} stroke={acid} strokeWidth="2" />
       <circle cx="0" cy="0" r="7" fill="none" stroke={acid} strokeWidth="2" />
       <line x1="-12" y1="0" x2="-9" y2="0" stroke={acid} strokeWidth="2" />
       <line x1="9" y1="0" x2="12" y2="0" stroke={acid} strokeWidth="2" />
       <line x1="0" y1="-12" x2="0" y2="-9" stroke={acid} strokeWidth="2" />
       <line x1="0" y1="9" x2="0" y2="12" stroke={acid} strokeWidth="2" />
-      <text y="40" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">
-        SIGNAL → KDM
-      </text>
+      <text y="40" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">SIGNAL → KDM</text>
     </motion.g>
   );
 }
@@ -316,134 +238,60 @@ function Recruit({ progress, target, appear }: { progress: MotionValue<number>; 
   );
 }
 
-// Phase 6 — "locked" reticle around the verified pipeline + ACTIVE tag.
 function LockBracket({ progress }: { progress: MotionValue<number> }) {
   const opacity = useTransform(progress, [0.82, 0.9], [0, 1]);
   const L = 26;
   const x1 = 350, y1 = 222, x2 = 748, y2 = 392;
   return (
     <motion.g style={{ opacity }}>
-      <motion.g
-        animate={{ opacity: [1, 0.45, 1] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-        stroke={acid}
-        strokeWidth={2.5}
-        fill="none"
-      >
+      <motion.g animate={{ opacity: [1, 0.45, 1] }} transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} stroke={acid} strokeWidth={2.5} fill="none">
         <path d={`M${x1},${y1 + L} V${y1} H${x1 + L}`} />
         <path d={`M${x2 - L},${y1} H${x2} V${y1 + L}`} />
         <path d={`M${x1},${y2 - L} V${y2} H${x1 + L}`} />
         <path d={`M${x2 - L},${y2} H${x2} V${y2 - L}`} />
       </motion.g>
-      <text x={(x1 + x2) / 2} y={y2 + 26} textAnchor="middle" className="font-mono" fontSize="13" fill={acid} letterSpacing="2">
-        PIPELINE ACTIVE
-      </text>
+      <text x={(x1 + x2) / 2} y={y2 + 26} textAnchor="middle" className="font-mono" fontSize="13" fill={acid} letterSpacing="2">PIPELINE ACTIVE</text>
     </motion.g>
   );
 }
 
-function Caption({ progress, step, title, line, win, cta }: Phase & { progress: MotionValue<number> }) {
-  const [a, b] = win;
-  const opacity = useTransform(progress, [a, a + 0.03, b - 0.04, b], [0, 1, 1, 0]);
-  const y = useTransform(progress, [a, a + 0.045], [18, 0]);
-  return (
-    <motion.div style={{ opacity, y }} className="absolute inset-x-0 bottom-0">
-      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-acid">{step}</p>
-      <h3 className="mt-3 font-display text-3xl uppercase leading-[0.95] text-bone sm:text-4xl">{title}</h3>
-      <p className="mt-3 max-w-2xl text-bone/70">{line}</p>
-      {cta && (
-        <button
-          type="button"
-          tabIndex={-1}
-          onClick={() => window.dispatchEvent(new CustomEvent("open-booking"))}
-          className="mt-6 inline-flex items-center gap-2 bg-acid px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink transition-colors hover:bg-bone"
-        >
-          Book a strategy call →
-        </button>
-      )}
-    </motion.div>
-  );
-}
-
-function CornerTicks() {
+/* --------------------------------------------------------------- the scene */
+function scene(progress: MotionValue<number>) {
   return (
     <>
-      <span className="absolute left-0 top-0 z-10 h-4 w-4 border-l-2 border-t-2 border-acid" />
-      <span className="absolute right-0 top-0 z-10 h-4 w-4 border-r-2 border-t-2 border-acid" />
-      <span className="absolute bottom-0 left-0 z-10 h-4 w-4 border-b-2 border-l-2 border-acid" />
-      <span className="absolute bottom-0 right-0 z-10 h-4 w-4 border-b-2 border-r-2 border-acid" />
+      {CHANNELS.map((c, i) => (
+        <PulseLine key={`cl${i}`} progress={progress} from={{ x: c.x, y: c.y }} to={GC} appear={[0.44 + i * 0.015, 0.54]} dur={1.4 + i * 0.18} dim={{ at: [0.58, 0.66], to: 0.12 }} />
+      ))}
+      {SOURCES.map((s, i) => (
+        <PulseLine key={`sl${i}`} progress={progress} from={{ x: s.x, y: s.y }} to={HUB} appear={[0.6 + i * 0.015, 0.68]} dur={1.5 + i * 0.16} />
+      ))}
+      {RECRUITS.map((r, i) => (
+        <PulseLine key={`rl${i}`} progress={progress} from={HUB} to={{ x: r.x, y: r.y }} appear={[0.66 + i * 0.03, 0.74]} dur={1.6} />
+      ))}
+
+      <ListIcon progress={progress} />
+      {PERSONS.map((p) => (
+        <Person key={p.id} p={p} progress={progress} />
+      ))}
+      {RECRUITS.map((r, i) => (
+        <Recruit key={`r${i}`} progress={progress} target={{ x: r.x, y: r.y }} appear={r.appear} />
+      ))}
+
+      <LockBracket progress={progress} />
+
+      {CHANNELS.map((c, i) => (
+        <IconNode key={`c${i}`} progress={progress} x={c.x} y={c.y} label={c.label} name={c.icon} kind="channel" appear={[0.42 + i * 0.02, 0.5]} />
+      ))}
+      {SOURCES.map((s, i) => (
+        <IconNode key={`s${i}`} progress={progress} x={s.x} y={s.y} label={s.label} name={s.icon} kind="source" appear={[0.58 + i * 0.02, 0.66]} />
+      ))}
+      <SignalHub progress={progress} />
     </>
   );
 }
 
-/* --------------------------------------------------------- animated story */
-function AnimatedStory() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-
-  return (
-    <section ref={ref} style={{ height: "660vh" }} className="relative bg-ink text-bone">
-      {/* Screen-reader narrative (visual version is aria-hidden) */}
-      <h2 className="sr-only">How Sapper builds your pipeline</h2>
-      <ol className="sr-only">
-        {PHASES.map((ph, i) => (
-          <li key={i}>{`${ph.step}: ${ph.title} ${ph.line}`}</li>
-        ))}
-      </ol>
-
-      <div className="sticky top-0 h-screen overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-tactical-grid opacity-60" />
-        <CornerTicks />
-        <p className="absolute left-4 top-8 z-10 font-mono text-[11px] uppercase tracking-[0.25em] text-acid sm:left-8">
-          Operation / The Pursuit
-        </p>
-
-        <div className="absolute inset-0 z-0 flex items-center justify-center px-4">
-          <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" className="h-full max-h-[66vh] w-full max-w-5xl">
-            {CHANNELS.map((c, i) => (
-              <PulseLine key={`cl${i}`} progress={scrollYProgress} from={{ x: c.x, y: c.y }} to={GC} appear={[0.44 + i * 0.015, 0.54]} dur={1.4 + i * 0.18} dim={{ at: [0.58, 0.66], to: 0.12 }} />
-            ))}
-            {SOURCES.map((s, i) => (
-              <PulseLine key={`sl${i}`} progress={scrollYProgress} from={{ x: s.x, y: s.y }} to={HUB} appear={[0.6 + i * 0.015, 0.68]} dur={1.5 + i * 0.16} />
-            ))}
-            {RECRUITS.map((r, i) => (
-              <PulseLine key={`rl${i}`} progress={scrollYProgress} from={HUB} to={{ x: r.x, y: r.y }} appear={[0.66 + i * 0.03, 0.74]} dur={1.6} />
-            ))}
-
-            <ListIcon progress={scrollYProgress} />
-            {PERSONS.map((p) => (
-              <Person key={p.id} p={p} progress={scrollYProgress} />
-            ))}
-            {RECRUITS.map((r, i) => (
-              <Recruit key={`r${i}`} progress={scrollYProgress} target={{ x: r.x, y: r.y }} appear={r.appear} />
-            ))}
-
-            <LockBracket progress={scrollYProgress} />
-
-            {CHANNELS.map((c, i) => (
-              <IconNode key={`c${i}`} progress={scrollYProgress} x={c.x} y={c.y} label={c.label} name={c.icon} kind="channel" appear={[0.42 + i * 0.02, 0.5]} />
-            ))}
-            {SOURCES.map((s, i) => (
-              <IconNode key={`s${i}`} progress={scrollYProgress} x={s.x} y={s.y} label={s.label} name={s.icon} kind="source" appear={[0.58 + i * 0.02, 0.66]} />
-            ))}
-            <SignalHub progress={scrollYProgress} />
-          </svg>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-16 z-10 mx-auto max-w-3xl px-4 sm:px-8">
-          {PHASES.map((ph, i) => (
-            <Caption key={i} progress={scrollYProgress} {...ph} />
-          ))}
-        </div>
-
-        <motion.div style={{ scaleX: scrollYProgress }} className="absolute bottom-0 left-0 z-20 h-1 w-full origin-left bg-acid" />
-      </div>
-    </section>
-  );
-}
-
-/* ---------------------------------------------------------- static fallback */
-function StaticScene({ index }: { index: number }) {
+/* ----------------------------------------------------------- static frames */
+function staticScene(index: number) {
   return (
     <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" className="h-44 w-full" aria-hidden>
       {index === 0 && (
@@ -518,38 +366,16 @@ function StaticScene({ index }: { index: number }) {
   );
 }
 
-function StaticStory() {
-  return (
-    <section className="relative overflow-hidden bg-ink text-bone">
-      <div className="absolute inset-0 bg-tactical-grid opacity-50" aria-hidden />
-      <div className="relative mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-acid">Operation / The Pursuit</p>
-        <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">
-          How we build the <span className="text-acid">pipeline.</span>
-        </h2>
-        <ol className="mt-12 space-y-10">
-          {PHASES.map((ph, i) => (
-            <li key={i} className="border-t border-steel/20 pt-8">
-              <StaticScene index={i} />
-              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.25em] text-acid">{ph.step}</p>
-              <h3 className="mt-3 font-display text-2xl uppercase leading-[0.95] text-bone sm:text-3xl">{ph.title}</h3>
-              <p className="mt-3 text-bone/70">{ph.line}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-12 border-t border-steel/20 pt-10">
-          <BookingButton>Book a strategy call</BookingButton>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------------------------------------------------ export */
 export default function MethodScrollStory() {
-  const hydrated = useHydrated();
-  const reduce = useReducedMotion();
-  const compact = useMediaQuery("(max-width: 640px)");
-  if (!hydrated || reduce || compact) return <StaticStory />;
-  return <AnimatedStory />;
+  return (
+    <ScrollStory
+      label="Operation / The Pursuit"
+      srHeading="How Sapper builds your pipeline"
+      beats={BEATS}
+      scene={scene}
+      staticScene={staticScene}
+      staticTitle={<>How we build the <span className="text-acid">pipeline.</span></>}
+    />
+  );
 }
