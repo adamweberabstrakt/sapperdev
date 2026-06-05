@@ -1,15 +1,18 @@
 "use client";
 
-import { motion, useTransform, type MotionValue } from "framer-motion";
+import { type MotionValue } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import ScrollStory, { type Beat } from "@/components/scrollstory/ScrollStory";
+import {
+  PulseLine, IconNode, PulseNode, Origin, Reticle, Glyph, EntityCluster, TravelGlyph,
+  type Entity,
+} from "@/components/scrollstory/atoms";
 
 const { acid, steel, danger, panel } = siteConfig.brandColors as Record<string, string>;
 
 /* ------------------------------------------------------------------ layout */
-const CENTER = { x: 500, y: 300 };
-const GC = { x: 515, y: 305 };
 const HUB = { x: 500, y: 178 };
+const GC = { x: 515, y: 305 };
 
 const SCATTER: [number, number, boolean][] = [
   [180, 160, false], [300, 130, true], [430, 150, false], [560, 120, true],
@@ -22,7 +25,7 @@ const GRID: [number, number][] = [
   [380, 355], [470, 355], [560, 355], [650, 355],
 ];
 let gi = 0;
-const PERSONS = SCATTER.map(([ux, uy, good], id) => {
+const PERSONS: Entity[] = SCATTER.map(([ux, uy, good], id) => {
   const slot = good ? GRID[gi++] : null;
   return { id, ux, uy, good, gx: slot ? slot[0] : ux, gy: slot ? slot[1] : uy };
 });
@@ -54,84 +57,7 @@ const BEATS: Beat[] = [
   { step: "06 / The Pursuit", title: "A pipeline on a loop.", line: "Outbound motion and always-on recon run at once — a self-feeding pipeline that compounds, so qualified meetings keep landing on your calendar.", win: [0.78, 1.0], cta: true },
 ];
 
-/* --------------------------------------------------------------- svg atoms */
-function PersonShape() {
-  return (
-    <>
-      <circle cx="0" cy="-9" r="9" fill="currentColor" />
-      <path d="M-15,19 C-15,1 15,1 15,19 Z" fill="currentColor" />
-    </>
-  );
-}
-function PersonGlyph({ color = steel }: { color?: string }) {
-  return (
-    <g style={{ color }}>
-      <PersonShape />
-    </g>
-  );
-}
-
-function Person({ p, progress }: { p: (typeof PERSONS)[number]; progress: MotionValue<number> }) {
-  const kf = p.good ? [0.08, 0.2, 0.3, 0.4] : [0.08, 0.2, 0.32, 0.4];
-  const xVal = p.good ? [CENTER.x, p.ux, p.ux, p.gx] : [CENTER.x, p.ux, p.ux, p.ux];
-  const yVal = p.good ? [CENTER.y, p.uy, p.uy, p.gy] : [CENTER.y, p.uy, p.uy, p.uy + 260];
-  const x = useTransform(progress, kf, xVal);
-  const y = useTransform(progress, kf, yVal);
-  const opacity = useTransform(progress, p.good ? [0.03, 0.12] : [0.03, 0.12, 0.34, 0.4], p.good ? [0, 1] : [0, 1, 1, 0]);
-  const color = useTransform(progress, p.good ? [0.3, 0.38] : [0.28, 0.34], p.good ? [steel, acid] : [steel, danger]);
-  return (
-    <motion.g style={{ x, y, opacity, color }}>
-      <PersonShape />
-    </motion.g>
-  );
-}
-
-function ListIcon({ progress }: { progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, [0.05, 0.13], [1, 0]);
-  const scale = useTransform(progress, [0.05, 0.13], [1, 0.5]);
-  return (
-    <motion.g style={{ x: CENTER.x, y: CENTER.y, opacity, scale }}>
-      <rect x="-58" y="-76" width="116" height="152" rx="10" fill={panel} stroke={acid} strokeWidth="2.5" />
-      {[-40, -12, 16, 44].map((yy) => (
-        <g key={yy}>
-          <rect x="-40" y={yy - 6} width="14" height="12" rx="2" fill={acid} />
-          <rect x="-18" y={yy - 4} width="58" height="8" rx="4" fill={steel} />
-        </g>
-      ))}
-    </motion.g>
-  );
-}
-
-function PulseLine({
-  progress, from, to, appear, dur = 1.6, dim,
-}: {
-  progress: MotionValue<number>;
-  from: { x: number; y: number };
-  to: { x: number; y: number };
-  appear: [number, number];
-  dur?: number;
-  dim?: { at: [number, number]; to: number };
-}) {
-  const baseOpacity = useTransform(progress, appear, [0, 0.3]);
-  const pulseOpacity = useTransform(
-    progress,
-    dim ? [appear[0], appear[1], dim.at[0], dim.at[1]] : appear,
-    dim ? [0, 1, 1, dim.to] : [0, 1]
-  );
-  return (
-    <g>
-      <motion.line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke={steel} strokeWidth={1.5} style={{ opacity: baseOpacity }} />
-      <motion.line
-        x1={from.x} y1={from.y} x2={to.x} y2={to.y}
-        stroke={acid} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="6 80"
-        style={{ opacity: pulseOpacity }}
-        animate={{ strokeDashoffset: [86, 0] }}
-        transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
-      />
-    </g>
-  );
-}
-
+/* --------------------------------------------------- brand-specific icons */
 function ChannelIcon({ name }: { name: string }) {
   if (name === "mail")
     return (
@@ -190,70 +116,27 @@ function SourceIcon({ name }: { name: string }) {
   );
 }
 
-function IconNode({
-  progress, x, y, label, appear, kind, name,
-}: {
-  progress: MotionValue<number>;
-  x: number; y: number; label: string;
-  appear: [number, number]; kind: "channel" | "source"; name: string;
-}) {
-  const opacity = useTransform(progress, appear, [0, 1]);
-  const scale = useTransform(progress, appear, [0.6, 1]);
-  return (
-    <motion.g style={{ x, y, opacity, scale }}>
-      <rect x="-27" y="-27" width="54" height="54" rx="10" fill={panel} stroke={acid} strokeWidth="2" />
-      {kind === "channel" ? <ChannelIcon name={name} /> : <SourceIcon name={name} />}
-      <text y="44" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">{label}</text>
-    </motion.g>
-  );
-}
+const ListCard = (
+  <>
+    <rect x="-58" y="-76" width="116" height="152" rx="10" fill={panel} stroke={acid} strokeWidth="2.5" />
+    {[-40, -12, 16, 44].map((yy) => (
+      <g key={yy}>
+        <rect x="-40" y={yy - 6} width="14" height="12" rx="2" fill={acid} />
+        <rect x="-18" y={yy - 4} width="58" height="8" rx="4" fill={steel} />
+      </g>
+    ))}
+  </>
+);
 
-function SignalHub({ progress }: { progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, [0.62, 0.7], [0, 1]);
-  const scale = useTransform(progress, [0.62, 0.7], [0.6, 1]);
-  return (
-    <motion.g style={{ x: HUB.x, y: HUB.y, opacity, scale }}>
-      <motion.circle cx="0" cy="0" r="20" fill="none" stroke={acid} strokeWidth="2" animate={{ scale: [1, 1.9], opacity: [0.6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }} />
-      <circle cx="0" cy="0" r="20" fill={panel} stroke={acid} strokeWidth="2" />
-      <circle cx="0" cy="0" r="7" fill="none" stroke={acid} strokeWidth="2" />
-      <line x1="-12" y1="0" x2="-9" y2="0" stroke={acid} strokeWidth="2" />
-      <line x1="9" y1="0" x2="12" y2="0" stroke={acid} strokeWidth="2" />
-      <line x1="0" y1="-12" x2="0" y2="-9" stroke={acid} strokeWidth="2" />
-      <line x1="0" y1="9" x2="0" y2="12" stroke={acid} strokeWidth="2" />
-      <text y="40" textAnchor="middle" className="font-mono" fontSize="13" fill={steel} letterSpacing="1.5">SIGNAL → KDM</text>
-    </motion.g>
-  );
-}
-
-function Recruit({ progress, target, appear }: { progress: MotionValue<number>; target: { x: number; y: number }; appear: [number, number] }) {
-  const [a, b] = appear;
-  const x = useTransform(progress, [a, b], [HUB.x, target.x]);
-  const y = useTransform(progress, [a, b], [HUB.y, target.y]);
-  const opacity = useTransform(progress, [a, a + 0.03], [0, 1]);
-  const color = useTransform(progress, [a + 0.04, b], [steel, acid]);
-  return (
-    <motion.g style={{ x, y, opacity, color }}>
-      <PersonShape />
-    </motion.g>
-  );
-}
-
-function LockBracket({ progress }: { progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, [0.82, 0.9], [0, 1]);
-  const L = 26;
-  const x1 = 350, y1 = 222, x2 = 748, y2 = 392;
-  return (
-    <motion.g style={{ opacity }}>
-      <motion.g animate={{ opacity: [1, 0.45, 1] }} transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} stroke={acid} strokeWidth={2.5} fill="none">
-        <path d={`M${x1},${y1 + L} V${y1} H${x1 + L}`} />
-        <path d={`M${x2 - L},${y1} H${x2} V${y1 + L}`} />
-        <path d={`M${x1},${y2 - L} V${y2} H${x1 + L}`} />
-        <path d={`M${x2 - L},${y2} H${x2} V${y2 - L}`} />
-      </motion.g>
-      <text x={(x1 + x2) / 2} y={y2 + 26} textAnchor="middle" className="font-mono" fontSize="13" fill={acid} letterSpacing="2">PIPELINE ACTIVE</text>
-    </motion.g>
-  );
-}
+const Crosshair = (
+  <>
+    <circle cx="0" cy="0" r="7" fill="none" stroke={acid} strokeWidth="2" />
+    <line x1="-12" y1="0" x2="-9" y2="0" stroke={acid} strokeWidth="2" />
+    <line x1="9" y1="0" x2="12" y2="0" stroke={acid} strokeWidth="2" />
+    <line x1="0" y1="-12" x2="0" y2="-9" stroke={acid} strokeWidth="2" />
+    <line x1="0" y1="9" x2="0" y2="12" stroke={acid} strokeWidth="2" />
+  </>
+);
 
 /* --------------------------------------------------------------- the scene */
 function scene(progress: MotionValue<number>) {
@@ -269,23 +152,25 @@ function scene(progress: MotionValue<number>) {
         <PulseLine key={`rl${i}`} progress={progress} from={HUB} to={{ x: r.x, y: r.y }} appear={[0.66 + i * 0.03, 0.74]} dur={1.6} />
       ))}
 
-      <ListIcon progress={progress} />
-      {PERSONS.map((p) => (
-        <Person key={p.id} p={p} progress={progress} />
-      ))}
+      <Origin progress={progress} x={500} y={300}>{ListCard}</Origin>
+      <EntityCluster progress={progress} entities={PERSONS} />
       {RECRUITS.map((r, i) => (
-        <Recruit key={`r${i}`} progress={progress} target={{ x: r.x, y: r.y }} appear={r.appear} />
+        <TravelGlyph key={`r${i}`} progress={progress} from={HUB} to={{ x: r.x, y: r.y }} appear={r.appear} />
       ))}
 
-      <LockBracket progress={progress} />
+      <Reticle progress={progress} box={{ x1: 350, y1: 222, x2: 748, y2: 392 }} appear={[0.82, 0.9]} label="PIPELINE ACTIVE" />
 
       {CHANNELS.map((c, i) => (
-        <IconNode key={`c${i}`} progress={progress} x={c.x} y={c.y} label={c.label} name={c.icon} kind="channel" appear={[0.42 + i * 0.02, 0.5]} />
+        <IconNode key={`c${i}`} progress={progress} x={c.x} y={c.y} label={c.label} appear={[0.42 + i * 0.02, 0.5]}>
+          <ChannelIcon name={c.icon} />
+        </IconNode>
       ))}
       {SOURCES.map((s, i) => (
-        <IconNode key={`s${i}`} progress={progress} x={s.x} y={s.y} label={s.label} name={s.icon} kind="source" appear={[0.58 + i * 0.02, 0.66]} />
+        <IconNode key={`s${i}`} progress={progress} x={s.x} y={s.y} label={s.label} appear={[0.58 + i * 0.02, 0.66]}>
+          <SourceIcon name={s.icon} />
+        </IconNode>
       ))}
-      <SignalHub progress={progress} />
+      <PulseNode progress={progress} x={HUB.x} y={HUB.y} appear={[0.62, 0.7]} label="SIGNAL → KDM">{Crosshair}</PulseNode>
     </>
   );
 }
@@ -307,15 +192,15 @@ function staticScene(index: number) {
       )}
       {index === 1 &&
         [[90, 90], [170, 70], [250, 95], [320, 75], [70, 165], [150, 150], [230, 170], [310, 155], [120, 235], [210, 230], [290, 235]].map(([cx, cy], i) => (
-          <g key={i} transform={`translate(${cx},${cy}) scale(0.7)`}><PersonGlyph color={steel} /></g>
+          <g key={i} transform={`translate(${cx},${cy}) scale(0.7)`}><Glyph color={steel} /></g>
         ))}
       {index === 2 && (
         <>
           {[[120, 110], [200, 110], [280, 110], [120, 185], [200, 185], [280, 185]].map(([cx, cy], i) => (
-            <g key={`g${i}`} transform={`translate(${cx},${cy}) scale(0.75)`}><PersonGlyph color={acid} /></g>
+            <g key={`g${i}`} transform={`translate(${cx},${cy}) scale(0.75)`}><Glyph color={acid} /></g>
           ))}
           {[[150, 265], [250, 265]].map(([cx, cy], i) => (
-            <g key={`b${i}`} transform={`translate(${cx},${cy}) scale(0.7)`} opacity={0.4}><PersonGlyph color={danger} /></g>
+            <g key={`b${i}`} transform={`translate(${cx},${cy}) scale(0.7)`} opacity={0.4}><Glyph color={danger} /></g>
           ))}
         </>
       )}
@@ -328,7 +213,7 @@ function staticScene(index: number) {
             </g>
           ))}
           {[[170, 130], [230, 130], [170, 175], [230, 175]].map(([cx, cy], i) => (
-            <g key={`g${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><PersonGlyph color={acid} /></g>
+            <g key={`g${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><Glyph color={acid} /></g>
           ))}
         </>
       )}
@@ -343,9 +228,9 @@ function staticScene(index: number) {
           <circle cx={200} cy={120} r={15} fill={panel} stroke={acid} strokeWidth={2} />
           <line x1={200} y1={135} x2={270} y2={205} stroke={acid} strokeOpacity={0.5} strokeWidth={1.5} strokeDasharray="4 6" />
           {[[150, 215], [200, 215]].map(([cx, cy], i) => (
-            <g key={`gg${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><PersonGlyph color={acid} /></g>
+            <g key={`gg${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><Glyph color={acid} /></g>
           ))}
-          <g transform="translate(270,205) scale(0.62)"><PersonGlyph color={acid} /></g>
+          <g transform="translate(270,205) scale(0.62)"><Glyph color={acid} /></g>
         </>
       )}
       {index === 5 && (
@@ -357,7 +242,7 @@ function staticScene(index: number) {
             <path d="M330,214 V234 H310" />
           </g>
           {[[140, 120], [200, 120], [260, 120], [140, 180], [200, 180], [260, 180]].map(([cx, cy], i) => (
-            <g key={`p${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><PersonGlyph color={acid} /></g>
+            <g key={`p${i}`} transform={`translate(${cx},${cy}) scale(0.62)`}><Glyph color={acid} /></g>
           ))}
           <text x="200" y="262" textAnchor="middle" className="font-mono" fontSize="13" fill={acid} letterSpacing="2">PIPELINE ACTIVE</text>
         </>
