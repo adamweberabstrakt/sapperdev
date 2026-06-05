@@ -45,7 +45,13 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <Image src={siteConfig.logos.footer} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" />
+            {siteConfig.logos.footer ? (
+              <Image src={siteConfig.logos.footer} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" />
+            ) : (
+              <span className="font-display text-2xl uppercase tracking-tight text-bone">
+                {siteConfig.shortName}<span className="text-acid">.</span>
+              </span>
+            )}
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-bone/55">
               {"One coordinated pursuit of the accounts you've always wanted — B2B appointment setting built on a verified, intent-scored dream-ICP target list."}
             </p>

@@ -56,7 +56,13 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Image src={siteConfig.logos.header} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" priority />
+            {siteConfig.logos.header ? (
+              <Image src={siteConfig.logos.header} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" priority />
+            ) : (
+              <span className="font-display text-2xl uppercase tracking-tight text-bone">
+                {siteConfig.shortName}<span className="text-acid">.</span>
+              </span>
+            )}
           </Link>
 
           {/* Desktop Nav */}
