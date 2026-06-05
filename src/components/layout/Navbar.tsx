@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
+import { NO_NAV_ROUTES } from "@/lib/navConfig";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -41,6 +42,8 @@ export default function Navbar() {
     setDropdownOpen(false);
     window.dispatchEvent(new CustomEvent("open-booking"));
   };
+
+  if (NO_NAV_ROUTES.includes(pathname)) return null;
 
   return (
     <nav

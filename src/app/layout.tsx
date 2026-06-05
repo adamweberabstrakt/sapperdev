@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SiteMain from "@/components/layout/SiteMain";
 import CookieBanner from "@/components/layout/CookieBanner";
 import ChiliPiperLoader from "@/components/integrations/ChiliPiper";
 import BookingModal from "@/components/booking/BookingModal";
@@ -78,7 +79,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
 
         <Navbar />
-        <main className="pt-16">{children}</main>
+        <SiteMain>{children}</SiteMain>
         <Footer />
         <CookieBanner />
 
