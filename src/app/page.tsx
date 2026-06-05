@@ -4,6 +4,7 @@ import BookingButton from "@/components/ui/BookingButton";
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import DossierCard from "@/components/home/DossierCard";
+import MethodScrollStory from "@/components/method/MethodScrollStory";
 import { CASE_STUDIES } from "@/lib/constants";
 
 export const metadata = {
@@ -161,6 +162,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== METHOD SCROLL STORY ===== */}
+      <MethodScrollStory />
 
       {/* ===== COORDINATED MOTION / CHANNELS ===== */}
       <Section bg="ink">

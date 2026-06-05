@@ -58,6 +58,7 @@ export const siteConfig = {
     acid: "#B6F22B",
     steel: "#6B829E",
     bone: "#F5F7FA",
+    danger: "#FF4B3E",
   },
   fonts: {
     sans: ["Inter", "system-ui", "sans-serif"],
