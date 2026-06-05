@@ -551,7 +551,18 @@ variations across client sites + PPC landing pages that show how services coordi
 ## Staged build
 - [x] R1: extract ENGINE; rebuild current Sapper story on it with ZERO visual change; verify live identical.
 - [x] R2: extract scene ATOMS; recompose Sapper scene from atoms.
-- [ ] R3: add autoplay-in-view trigger mode (PPC variant, fewer beats).
+- [x] R3: add autoplay-in-view trigger mode (PPC variant, fewer beats).
 - [x] R4: build a 2nd proof story (Demand Generation) (one service) to set the copy-paste pattern.
-- [ ] R5: document in template repo (how to author a new story).
-- [ ] (then) port a variant to /process.
+- [x] R5: document in template repo (scrollstory/README.md) (how to author a new story).
+- [x] Port: added Method story to /process page.
+
+## REVIEW — ScrollStory framework (R1–R5 + /process port)
+- Engine: scrollstory/ScrollStory.tsx — scroll (pinned) + autoplay-in-view triggers,
+  captions, progress bar, SR narrative, CTA, static/mobile/reduced-motion fallback.
+  Final caption now holds (CTA persists at end).
+- Atoms: scrollstory/atoms.tsx — PulseLine (dim + bend + color), IconNode, PulseNode,
+  Origin, Reticle, EntityCluster, TravelGlyph, Counter, Ripple, Tag, Glyph.
+- Stories: method/MethodScrollStory.tsx (home + /process); stories/DemandGenScrollStory.tsx
+  (/demand-generation) — two-stack create+capture w/ live 18-touch counter.
+- Docs: scrollstory/README.md (architecture, authoring steps, props, trigger modes, atom catalog).
+- PPC usage: <ScrollStory trigger="autoplay" duration={...} /> with 2–4 beats. (No PPC page built yet.)
