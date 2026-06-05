@@ -503,7 +503,7 @@ Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process
       place on home after hero; ship; review motion feel.
 - [x] B: add phase 4 (4 channels strike list) + phase 5 (website/LinkedIn inbound recon
       feeding new people) with connecting lines/particles; ship; review.
-- [ ] C: phase 6 settle + CTA; caption polish; reduced-motion + mobile fallback; a11y; ship.
+- [x] C: phase 6 settle + CTA; caption polish; reduced-motion + mobile fallback; a11y; ship.
 - [ ] D (optional): port a longer variant to /process (augment or replace DataLoop).
 
 ## Open questions (see chat)
@@ -512,3 +512,17 @@ Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process
 3. Inbound sources = website-visitor data + LinkedIn only, or add a 3rd (e.g., intent data)?
 4. I'll draft the 6 captions for you to edit — confirm tone (mission/dossier voice).
 5. Confirm illustrative only (no live data / no backend).
+
+## REVIEW — Method scroll-story (Stages A–C shipped)
+- New component: src/components/method/MethodScrollStory.tsx (one self-contained client component).
+- Placed on home after hero/list/stats (CTAs above it). Six scroll-driven beats:
+  01 perfect list -> 02 universe -> 03 filter (red removed / green verified) ->
+  04 channels pulse into list -> 05 inbound recon (forms+mtgs/web/social -> SIGNAL→KDM hub
+  -> new members) -> 06 settle/lock ("PIPELINE ACTIVE") + Book-a-call CTA.
+- Tech: Framer Motion useScroll/useTransform; 660vh pinned stage; GPU-only props
+  (transform/opacity/fill/dashoffset); inline SVG icons (no new dependency).
+- Brand: added `danger` (#FF4B3E) to siteConfig.brandColors (flows to Tailwind).
+- Resilience/a11y/SEO: SSR + mobile (<640px) + reduced-motion render a static 6-panel
+  version (real text + CTA, crawlable). Animated path exposes an sr-only heading + ordered
+  list for screen readers; decorative SVG/captions aria-hidden; pinned CTA tabIndex -1.
+- Optional follow-ups: tune right-side line density during recon; port a variant to /process.
