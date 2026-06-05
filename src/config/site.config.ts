@@ -12,10 +12,28 @@ export const siteConfig = {
   tagline: "B2B Pipeline Generation",
   url: "https://sapperdev.vercel.app",
 
+  // Brand assets (per client). Swap these files in /public/images and update paths.
+  logos: {
+    header: "/images/sapper-logo-lime.png",
+    footer: "/images/sapper-logo-light.png",
+    mark: "/images/sapper-mark.png",
+  },
+
+  // Optional footer attribution. Set to "" for a client with no parent brand.
+  legal: {
+    attribution: "A division of Abstrakt Marketing Group",
+  },
+
   contact: {
     email: "adam.weber@abstraktmg.com",
     phone: "(314) 742-9830",
     phoneHref: "tel:+13147429830",
+  },
+
+  // Transactional email sender for the /api/contact route.
+  mail: {
+    fromName: "Sapper Website",
+    fromAddress: "noreply@sapperconsulting.com",
   },
 
   location: {

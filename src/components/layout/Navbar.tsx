@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { NO_NAV_ROUTES } from "@/lib/navConfig";
+import { siteConfig } from "@/config/site.config";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -55,7 +56,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Image src="/images/sapper-logo-lime.png" alt="Sapper" width={150} height={32} className="h-8 w-auto" priority />
+            <Image src={siteConfig.logos.header} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" priority />
           </Link>
 
           {/* Desktop Nav */}

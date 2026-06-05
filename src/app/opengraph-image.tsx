@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
+import { siteConfig } from "@/config/site.config";
 
 export const runtime = "edge";
-export const alt = "Sapper Consulting — B2B Pipeline Generation";
+export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -25,14 +26,14 @@ export default function OpengraphImage() {
             B2B Appointment Setting
           </div>
           <div style={{ display: "flex", fontSize: 104, fontWeight: 800, color: "#F5F7FA", lineHeight: 1, marginTop: 20, textTransform: "uppercase" }}>
-            Sapper<span style={{ color: "#B6F22B" }}>.</span>
+            {siteConfig.shortName}<span style={{ color: "#B6F22B" }}>.</span>
           </div>
           <div style={{ fontSize: 34, color: "rgba(245,247,250,0.72)", marginTop: 28, maxWidth: 900 }}>
             One coordinated pursuit of the accounts you&apos;ve always wanted.
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, color: "#6B829E", textTransform: "uppercase" }}>
-          Sapper Consulting · St. Louis
+          {siteConfig.name} · {siteConfig.location.city}
         </div>
       </div>
     ),

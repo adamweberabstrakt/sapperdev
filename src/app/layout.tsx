@@ -15,22 +15,22 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Sapper Consulting | B2B Pipeline Generation",
-    template: "%s | Sapper Consulting",
+    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "We generate consistent B2B sales meetings through strategic omni-channel outreach. Cold calling, email, and LinkedIn — coordinated to fill your pipeline.",
   openGraph: {
-    title: "Sapper Consulting | B2B Pipeline Generation",
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description:
       "We generate consistent B2B sales meetings through strategic omni-channel outreach.",
     url: siteConfig.url,
-    siteName: "Sapper Consulting",
+    siteName: siteConfig.name,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sapper Consulting | B2B Pipeline Generation",
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description:
       "We generate consistent B2B sales meetings through strategic omni-channel outreach.",
   },

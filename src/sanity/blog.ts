@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { BlogPost, Block, BlogCategory } from "@/lib/blog";
 import { sanityFetch } from "./fetch";
+import { siteConfig } from "@/config/site.config";
 
 const POST_FIELDS = `
   "slug": slug.current,
@@ -49,7 +50,7 @@ function mapPost(r: RawPost): BlogPost {
     title: r.title,
     excerpt: r.excerpt,
     category: r.category,
-    author: r.author || "Sapper Team",
+    author: r.author || `${siteConfig.shortName} Team`,
     date: (r.date || "").slice(0, 10),
     readTime: r.readTime || "",
     featured: r.featured,

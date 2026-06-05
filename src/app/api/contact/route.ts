@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { siteConfig } from "@/config/site.config";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,8 +21,8 @@ export async function POST(req: NextRequest) {
       const resend = new Resend(resendKey);
 
       await resend.emails.send({
-        from: "Sapper Website <noreply@sapperconsulting.com>",
-        to: "adam.weber@abstraktmg.com",
+        from: `${siteConfig.mail.fromName} <${siteConfig.mail.fromAddress}>`,
+        to: siteConfig.contact.email,
         subject: `New Contact: ${name} from ${company}`,
         html: `
           <h2>New Contact Form Submission</h2>

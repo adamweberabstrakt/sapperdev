@@ -574,3 +574,30 @@ variations across client sites + PPC landing pages that show how services coordi
   — validates R3 live.
 - robots: noindex, follow (paid LP; intentionally excluded from sitemap/organic).
 - Note: still uses global Navbar/Footer; can strip to a distraction-free LP layout if desired.
+
+---
+
+## Brand extraction → reusable template (dev branch)
+
+Goal: same codebase renders as Sapper (Sapper config) or any client (their config).
+Non-destructive — Sapper keeps working; copy-to-client = config swap.
+
+- [x] Audit hardcoded brand strings; separate chrome (extract) from content (replace per client)
+- [x] Add config keys: `logos`, `legal.attribution`, `mail` to site.config.ts
+- [x] Route layout.tsx metadata (title/template/OG/twitter) through siteConfig.name/tagline
+- [x] Route Navbar + Footer logos through siteConfig.logos; footer attribution optional
+- [x] Route opengraph-image (alt/wordmark/city) through siteConfig
+- [x] Route /api/contact sender + recipient through siteConfig.mail/contact
+- [x] Route Sanity author fallback through siteConfig.shortName
+- [x] docs/TEMPLATE-REBRANDING.md — 3-layer content map + rebrand process
+- [x] Build green; pushed to dev
+
+### Review
+Extraction was config-routing, not deletion — all 6 chrome files (layout, Navbar,
+Footer, opengraph-image, contact route, sanity/blog) now read brand identity from
+site.config.ts. Changing that one file rebrands the entire chrome, theme (tailwind
+reads brandColors/fonts), metadata, SEO files, OG image, footer attribution, and
+contact routing with zero component edits. Remaining per-client layers are
+documented: Layer 2 = lib/ content files + scroll-story copy; Layer 3 = page copy
+in src/app/. Sapper renders identically (config values unchanged). Build = 55 routes,
+green. On `dev`; not merged to main.

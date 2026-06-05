@@ -45,7 +45,7 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <Image src="/images/sapper-logo-light.png" alt="Sapper" width={150} height={32} className="h-8 w-auto" />
+            <Image src={siteConfig.logos.footer} alt={siteConfig.shortName} width={150} height={32} className="h-8 w-auto" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-bone/55">
               {"One coordinated pursuit of the accounts you've always wanted — B2B appointment setting built on a verified, intent-scored dream-ICP target list."}
             </p>
@@ -92,7 +92,7 @@ export default function Footer() {
       <div className="border-t border-steel/20">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-steel/70">
-            © {year} Sapper Consulting · A division of Abstrakt Marketing Group
+            © {year} {siteConfig.name}{siteConfig.legal.attribution ? ` · ${siteConfig.legal.attribution}` : ""}
           </p>
           <div className="flex gap-6 font-mono text-[11px] uppercase tracking-[0.16em] text-steel/70">
             <Link href="/privacy-policy" className="transition-colors hover:text-bone">Privacy</Link>
