@@ -566,3 +566,11 @@ variations across client sites + PPC landing pages that show how services coordi
   (/demand-generation) — two-stack create+capture w/ live 18-touch counter.
 - Docs: scrollstory/README.md (architecture, authoring steps, props, trigger modes, atom catalog).
 - PPC usage: <ScrollStory trigger="autoplay" duration={...} /> with 2–4 beats. (No PPC page built yet.)
+
+## PPC LP — /hit-appointment-goals (built from HIT sales deck)
+- Conversion-focused page for the HIT Method demand-gen offer (LinkedIn engine, 500 dials,
+  $2,500 managed spend, 14-days-to-live, scored HIT list, shared appointment goal).
+- Centerpiece = home scroll story in AUTOPLAY mode (MethodScrollStory trigger="autoplay" duration={9})
+  — validates R3 live.
+- robots: noindex, follow (paid LP; intentionally excluded from sitemap/organic).
+- Note: still uses global Navbar/Footer; can strip to a distraction-free LP layout if desired.
