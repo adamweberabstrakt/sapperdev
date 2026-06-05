@@ -252,7 +252,13 @@ function staticScene(index: number) {
 }
 
 /* ------------------------------------------------------------------ export */
-export default function MethodScrollStory() {
+export default function MethodScrollStory({
+  trigger = "scroll",
+  duration,
+}: {
+  trigger?: "scroll" | "autoplay";
+  duration?: number;
+} = {}) {
   return (
     <ScrollStory
       label="Operation / The Pursuit"
@@ -261,6 +267,8 @@ export default function MethodScrollStory() {
       scene={scene}
       staticScene={staticScene}
       staticTitle={<>How we build the <span className="text-acid">pipeline.</span></>}
+      trigger={trigger}
+      duration={duration}
     />
   );
 }
