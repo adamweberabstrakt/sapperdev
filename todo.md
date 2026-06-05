@@ -499,7 +499,7 @@ Primary home: Home page (centerpiece, after hero). Reusable as a fuller /process
 - Mobile (<sm): default to stacked static panels for performance (vs. heavy pinned scroll).
 
 ## Staged build (smallest-blast-radius, review between each)
-- [ ] A: add `danger` token; build component skeleton + phases 1-3 (list->universe->filter);
+- [x] A: add `danger` token; build component skeleton + phases 1-3 (list->universe->filter);
       place on home after hero; ship; review motion feel.
 - [ ] B: add phase 4 (4 channels strike list) + phase 5 (website/LinkedIn inbound recon
       feeding new people) with connecting lines/particles; ship; review.
