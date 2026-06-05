@@ -1,7 +1,7 @@
 "use client";
 
-import { type ReactNode } from "react";
-import { motion, useTransform, type MotionValue } from "framer-motion";
+import { useState, type ReactNode } from "react";
+import { motion, useTransform, useMotionValueEvent, type MotionValue } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 
 const C = siteConfig.brandColors as Record<string, string>;
@@ -33,7 +33,7 @@ export function Glyph({ shape = "person", color = STEEL }: { shape?: "person"; c
  * one appears.
  */
 export function PulseLine({
-  progress, from, to, appear, dur = 1.6, dim, color = ACID,
+  progress, from, to, appear, dur = 1.6, dim, color = ACID, bend,
 }: {
   progress: MotionValue<number>;
   from: { x: number; y: number };
@@ -42,6 +42,8 @@ export function PulseLine({
   dur?: number;
   dim?: { at: [number, number]; to: number };
   color?: string;
+  /** Perpendicular curve offset; when set the connector bends (for loop-backs). */
+  bend?: number;
 }) {
   const baseOpacity = useTransform(progress, appear, [0, 0.3]);
   const pulseOpacity = useTransform(
@@ -49,6 +51,24 @@ export function PulseLine({
     dim ? [appear[0], appear[1], dim.at[0], dim.at[1]] : appear,
     dim ? [0, 1, 1, dim.to] : [0, 1]
   );
+  if (bend !== undefined) {
+    const mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2;
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const cx = mx + (-dy / len) * bend, cy = my + (dx / len) * bend;
+    const d = `M${from.x},${from.y} Q${cx},${cy} ${to.x},${to.y}`;
+    return (
+      <g>
+        <motion.path d={d} fill="none" stroke={STEEL} strokeWidth={1.5} style={{ opacity: baseOpacity }} />
+        <motion.path
+          d={d} fill="none" stroke={color} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="6 80"
+          style={{ opacity: pulseOpacity }}
+          animate={{ strokeDashoffset: [86, 0] }}
+          transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
+        />
+      </g>
+    );
+  }
   return (
     <g>
       <motion.line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke={STEEL} strokeWidth={1.5} style={{ opacity: baseOpacity }} />
@@ -226,6 +246,70 @@ export function TravelGlyph({
   return (
     <motion.g style={{ x, y, opacity, color }}>
       <PersonPaths />
+    </motion.g>
+  );
+}
+
+/* -------------------------------------------------------------- counters */
+/** A scroll-driven number that counts from `from` to `to` over the `at` window. */
+export function Counter({
+  progress, x, y, to, from = 0, at, label, suffix = "", size = 64, color = ACID,
+}: {
+  progress: MotionValue<number>;
+  x: number; y: number; to: number; from?: number;
+  at: [number, number]; label?: string; suffix?: string; size?: number; color?: string;
+}) {
+  const v = useTransform(progress, at, [from, to]);
+  const [n, setN] = useState(from);
+  useMotionValueEvent(v, "change", (latest) => {
+    setN(Math.round(Math.min(Math.max(latest, Math.min(from, to)), Math.max(from, to))));
+  });
+  const opacity = useTransform(progress, [at[0] - 0.03, at[0] + 0.01], [0, 1]);
+  return (
+    <motion.g style={{ x, y, opacity }}>
+      <text textAnchor="middle" className="font-display" fontSize={size} fill={color}>{n}{suffix}</text>
+      {label && (
+        <text y={24} textAnchor="middle" className="font-mono" fontSize="13" fill={STEEL} letterSpacing="2">{label}</text>
+      )}
+    </motion.g>
+  );
+}
+
+/* --------------------------------------------------------------- ripples */
+/** Expanding concentric rings — a reach / brand-awareness motif. */
+export function Ripple({
+  progress, x, y, appear, maxR = 170, rings = 3, color = ACID,
+}: {
+  progress: MotionValue<number>;
+  x: number; y: number; appear: [number, number]; maxR?: number; rings?: number; color?: string;
+}) {
+  const opacity = useTransform(progress, appear, [0, 1]);
+  return (
+    <motion.g style={{ x, y, opacity }}>
+      {Array.from({ length: rings }).map((_, i) => (
+        <motion.circle
+          key={i} cx={0} cy={0} r={maxR} fill="none" stroke={color} strokeWidth={1.5}
+          animate={{ scale: [0.08, 1], opacity: [0.5, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: (i * 3) / rings }}
+        />
+      ))}
+    </motion.g>
+  );
+}
+
+/* ------------------------------------------------------------------ tags */
+/** A simple appear-gated mono label, for in-scene callouts. */
+export function Tag({
+  progress, x, y, appear, text, color = ACID, size = 13, anchor = "middle",
+}: {
+  progress: MotionValue<number>;
+  x: number; y: number; appear: [number, number]; text: string;
+  color?: string; size?: number; anchor?: "start" | "middle" | "end";
+}) {
+  const opacity = useTransform(progress, appear, [0, 1]);
+  return (
+    <motion.g style={{ opacity }}>
+      <text x={x} y={y} textAnchor={anchor} className="font-mono" fontSize={size} fill={color} letterSpacing="2">{text}</text>
     </motion.g>
   );
 }

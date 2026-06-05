@@ -1,6 +1,7 @@
 import Section from "@/components/ui/Section";
 import AnimateIn from "@/components/ui/AnimateIn";
 import BookingButton from "@/components/ui/BookingButton";
+import DemandGenScrollStory from "@/components/stories/DemandGenScrollStory";
 
 export const metadata = {
   title: "Demand Generation",
@@ -63,6 +64,9 @@ export default function DemandGen() {
           ))}
         </div>
       </Section>
+
+      {/* ===== DEMAND ENGINE SCROLL STORY ===== */}
+      <DemandGenScrollStory />
 
       <section className="bg-panel text-bone">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
