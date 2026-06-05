@@ -549,7 +549,7 @@ variations across client sites + PPC landing pages that show how services coordi
 - Authoring: developer-written Scenes composed from atoms now; JSON/CMS-driven schema later (Sanity).
 
 ## Staged build
-- [ ] R1: extract ENGINE; rebuild current Sapper story on it with ZERO visual change; verify live identical.
+- [x] R1: extract ENGINE; rebuild current Sapper story on it with ZERO visual change; verify live identical.
 - [ ] R2: extract scene ATOMS; recompose Sapper scene from atoms.
 - [ ] R3: add autoplay-in-view trigger mode (PPC variant, fewer beats).
 - [ ] R4: build a 2nd proof story (one service) to set the copy-paste pattern.
