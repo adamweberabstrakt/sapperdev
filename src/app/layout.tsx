@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   },
   description:
     "We generate consistent B2B sales meetings through strategic omni-channel outreach. Cold calling, email, and LinkedIn — coordinated to fill your pipeline.",
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
   openGraph: {
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description:
