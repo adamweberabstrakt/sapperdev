@@ -615,7 +615,7 @@ Built in `sapperdev` on branch `feat/brand-refresh` (off `dev`); deck object lat
 - [x] Favicon = cropped circuit mark (icon.png / favicon.ico / apple-icon.png; navy tile for iOS)
 - [ ] Global copy: 500 → 650 dials everywhere
 - [ ] Team page: Jeff = "Original Founder"; Amie Milner = "General Manager", top of division hierarchy
-- [ ] Forms bug (priority): diagnose + fix non-firing Book-a-Call / Strategy-Call CTAs
+- [x] Forms: diagnosed — booking CTAs were already wired correctly (no code bug; old WP site likely). Built a contact form on /contact → Resend (submitter confirmation + Sapper notification, failures non-fatal) + real ChiliPiper router `sapper_router_1` (routes + books on submit) + `generate_lead` dataLayer event
 - [ ] Forbes "as featured in" strip near hero, linking to the Forbes profile
 
 ### Phase 2 — HIT Method deck (sapperdev, on ScrollStory engine)
@@ -634,3 +634,14 @@ favicon/logo assets. No component logic changed. `next build` passes. Visible ef
 backgrounds shift to brand navy #0B2E57, accent flips lime → purple #A82EFF sitewide, new Sapper
 wordmark + circuit-mark favicon. CTAs are navy-on-purple via the existing token pairing (can switch
 CTA text to white if preferred).
+
+### Review — commit 2 (contact form + real router + Resend)
+- New `src/components/contact/ContactForm.tsx` (client): first/last/email/company/phone/message, JS validation, success state.
+- On submit: POST `/api/contact` (Resend) → fire real router `sapper_router_1` via concierge (guarded) → push `generate_lead`.
+- `/api/contact`: now sends a submitter confirmation AND the Sapper notification; Resend errors are caught (non-fatal) so an unverified domain can't break the form.
+- `/contact`: form replaces the inline calendar (a "Book directly" button still opens the calendar modal); "no forms" hero + meta copy updated.
+- `next build` passes.
+
+### Open dependencies (need Adam / external setup)
+- Resend: set `RESEND_API_KEY` in Netlify env + verify the sending domain (currently from = noreply@sapperconsulting.com). Until verified, emails are skipped/caught and the form still succeeds (ChiliPiper still books).
+- Standalone "Book directly" / "Book a strategy call" CTAs still use the iframe round-robin link `…/round-robin/sapper-demo` (a DEMO). That's a different ChiliPiper mechanism than the router — need the real round-robin URL to swap, OR decide to route those through `sapper_router_1` too.

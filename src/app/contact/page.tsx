@@ -1,12 +1,13 @@
 import AnimateIn from "@/components/ui/AnimateIn";
 import TargetRadar from "@/components/contact/TargetRadar";
-import BookingCalendar from "@/components/booking/BookingCalendar";
+import ContactForm from "@/components/contact/ContactForm";
+import BookingButton from "@/components/ui/BookingButton";
 import { siteConfig } from "@/config/site.config";
 
 export const metadata = {
   title: "Contact",
   description:
-    "Book a strategy call with Sapper. A U.S.-based team of 400+ in St. Louis, ready to lock onto your pipeline. Pick a time on the calendar — no forms, no phone tag.",
+    "Reach the Sapper team — 400+ U.S.-based pros in St. Louis. Tell us about your pipeline and a strategist reaches out, or book a strategy call directly.",
 };
 
 const INTEL = [
@@ -30,7 +31,7 @@ export default function Contact() {
             Find the right target. <span className="text-acid">Book the call.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-bone/70 sm:text-xl animate-fade-up" style={{ animationDelay: "0.16s" }}>
-            {`A ${siteConfig.location.basedIn} team of ${siteConfig.location.teamSize}, working from our ${siteConfig.location.city} office. Pick a time below and we will lock onto your pipeline — no forms, no phone tag.`}
+            {`A ${siteConfig.location.basedIn} team of ${siteConfig.location.teamSize}, working from our ${siteConfig.location.city} office. Send us the basics or grab a time directly — either way, we lock onto your pipeline.`}
           </p>
         </div>
       </section>
@@ -66,19 +67,27 @@ export default function Contact() {
               </a>
             </AnimateIn>
 
-            {/* Right: inline calendar */}
+            {/* Right: contact form — posts to /api/contact (Resend) and routes + books via the real ChiliPiper router */}
             <div>
               <AnimateIn delay={0.12}>
                 <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel">
-                  Direct Booking / Secure Channel
+                  Open a Channel / Tell Us the Target
                 </p>
                 <h2 className="mt-4 font-display text-3xl uppercase leading-[0.98] sm:text-4xl">
-                  Lock a <span className="text-acid">time.</span>
+                  Start the <span className="text-acid">pursuit.</span>
                 </h2>
+                <p className="mt-3 max-w-md text-sm text-bone/60">
+                  Send the basics and a strategist reaches out to map your appointment goal.
+                </p>
               </AnimateIn>
-              {/* iframe kept OUT of the Framer transform: transformed ancestors swallow iframe clicks */}
-              <div className="relative z-10 mt-6">
-                <BookingCalendar className="h-[620px] w-full overflow-hidden border border-steel/20" />
+              <div className="mt-6">
+                <ContactForm />
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-steel">
+                  Prefer to pick a time yourself?
+                </span>
+                <BookingButton variant="outline-acid">Book directly</BookingButton>
               </div>
             </div>
           </div>
