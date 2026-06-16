@@ -14,8 +14,8 @@ export const siteConfig = {
 
   // Brand assets (per client). Swap these files in /public/images and update paths.
   logos: {
-    header: "/images/sapper-logo-lime.png",
-    footer: "/images/sapper-logo-light.png",
+    header: "/images/sapper-logo-white.png",
+    footer: "/images/sapper-logo-white.png",
     mark: "/images/sapper-mark.png",
   },
 
@@ -71,11 +71,12 @@ export const siteConfig = {
 
   // Brand v2 design tokens — consumed by tailwind.config.ts.
   brandColors: {
-    ink: "#0B1B30",
+    ink: "#0B2E57",
     panel: "#11243D",
-    acid: "#B6F22B",
-    steel: "#6B829E",
-    bone: "#F5F7FA",
+    acid: "#A82EFF",
+    secondary: "#00D0FF",
+    steel: "#475F7C",
+    bone: "#F4F4F4",
     danger: "#FF4B3E",
   },
   fonts: {

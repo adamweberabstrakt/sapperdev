@@ -16,23 +16,23 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0B1B30",
+          backgroundColor: "#0B2E57",
           padding: "72px 80px",
         }}
       >
-        <div style={{ display: "flex", height: 10, width: 140, backgroundColor: "#B6F22B" }} />
+        <div style={{ display: "flex", height: 10, width: 140, backgroundColor: "#A82EFF" }} />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 26, letterSpacing: 6, color: "#6B829E", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 26, letterSpacing: 6, color: "#475F7C", textTransform: "uppercase" }}>
             B2B Appointment Setting
           </div>
-          <div style={{ display: "flex", fontSize: 104, fontWeight: 800, color: "#F5F7FA", lineHeight: 1, marginTop: 20, textTransform: "uppercase" }}>
-            {siteConfig.shortName}<span style={{ color: "#B6F22B" }}>.</span>
+          <div style={{ display: "flex", fontSize: 104, fontWeight: 800, color: "#F4F4F4", lineHeight: 1, marginTop: 20, textTransform: "uppercase" }}>
+            {siteConfig.shortName}<span style={{ color: "#A82EFF" }}>.</span>
           </div>
           <div style={{ fontSize: 34, color: "rgba(245,247,250,0.72)", marginTop: 28, maxWidth: 900 }}>
             One coordinated pursuit of the accounts you&apos;ve always wanted.
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, color: "#6B829E", textTransform: "uppercase" }}>
+        <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, color: "#475F7C", textTransform: "uppercase" }}>
           {siteConfig.name} · {siteConfig.location.city}
         </div>
       </div>

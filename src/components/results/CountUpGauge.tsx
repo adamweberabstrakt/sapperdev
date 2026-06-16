@@ -38,13 +38,13 @@ export default function CountUpGauge({
   return (
     <div ref={ref} className="relative mx-auto flex h-56 w-56 items-center justify-center">
       <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90">
-        <circle cx="60" cy="60" r={R} fill="none" stroke="#6B829E" strokeOpacity="0.2" strokeWidth="6" />
+        <circle cx="60" cy="60" r={R} fill="none" stroke="#475F7C" strokeOpacity="0.2" strokeWidth="6" />
         <circle
           cx="60"
           cy="60"
           r={R}
           fill="none"
-          stroke="#B6F22B"
+          stroke="#A82EFF"
           strokeWidth="6"
           strokeLinecap="round"
           strokeDasharray={C}

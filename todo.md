@@ -601,3 +601,36 @@ contact routing with zero component edits. Remaining per-client layers are
 documented: Layer 2 = lib/ content files + scroll-story copy; Layer 3 = page copy
 in src/app/. Sapper renders identically (config values unchanged). Build = 55 routes,
 green. On `dev`; not merged to main.
+
+---
+
+## HIT Method Deck + Brand Refresh — 2026-06-16
+Built in `sapperdev` on branch `feat/brand-refresh` (off `dev`); deck object later lifted into
+`inbound2.0-stack`. Never commit to `main`.
+
+### Phase 1 — Brand refresh + site edits (sapperdev, isolated)
+- [x] Brand tokens → new palette in siteConfig.brandColors (ink #0B2E57, acid #A82EFF, +secondary #00D0FF, steel #475F7C, bone #F4F4F4; panel/danger kept)
+- [x] Swept hardcoded off-palette hexes onto new values (CountUpGauge, opengraph-image)
+- [x] New logos placed; header + footer use white wordmark (nav/footer are dark bg-ink); navy wordmark → schema logo
+- [x] Favicon = cropped circuit mark (icon.png / favicon.ico / apple-icon.png; navy tile for iOS)
+- [ ] Global copy: 500 → 650 dials everywhere
+- [ ] Team page: Jeff = "Original Founder"; Amie Milner = "General Manager", top of division hierarchy
+- [ ] Forms bug (priority): diagnose + fix non-firing Book-a-Call / Strategy-Call CTAs
+- [ ] Forbes "as featured in" strip near hero, linking to the Forbes profile
+
+### Phase 2 — HIT Method deck (sapperdev, on ScrollStory engine)
+- [ ] 9-section scroll-story page (hero → agenda → credibility → method loop → battlecards → implementation → pricing → close → gated capture)
+- [ ] Deck keeps grass-lime accent (deck-level theme; add optional accent override to ScrollStory engine)
+- [ ] Gated capture form → generate_lead + UTM + ChiliPiper + Resend + /thank-you
+
+### Phase 3 — Lift to framework (inbound2.0-stack)
+- [ ] Generalize deck into a reusable, content-driven pitch-deck object type (for the 2nd site)
+
+### Open (client): pricing scope TBD; capture CRM/routing TBD; growth-graph option TBD
+
+### Review — commit 1 (brand foundation)
+Touched only siteConfig.brandColors + logos, two components' inline hexes, schema logo refs, and
+favicon/logo assets. No component logic changed. `next build` passes. Visible effect: dark
+backgrounds shift to brand navy #0B2E57, accent flips lime → purple #A82EFF sitewide, new Sapper
+wordmark + circuit-mark favicon. CTAs are navy-on-purple via the existing token pairing (can switch
+CTA text to white if preferred).

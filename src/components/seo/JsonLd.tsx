@@ -8,8 +8,8 @@ export default function JsonLd() {
     "@id": `${base}/#organization`,
     name: siteConfig.name,
     url: base,
-    logo: `${base}/images/sapper-logo-lime.png`,
-    image: `${base}/images/sapper-logo-lime.png`,
+    logo: `${base}/images/sapper-logo-navy.png`,
+    image: `${base}/images/sapper-logo-navy.png`,
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phoneHref.replace("tel:", ""),
     description:
